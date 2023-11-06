@@ -1,0 +1,102 @@
+[
+    {
+      "Name": "DJI Phantom 4 Pro",
+      "Type": "Drone",
+      "Model": "Phantom 4 Pro",
+      "SerialNumber": "P4P123456",
+      "PurchaseDate": "2022-03-15",
+      "Condition": "Good",
+      "Color": "White"
+    },
+    {
+      "Name": "Sony Alpha 7 III",
+      "Type": "Video Camera",
+      "Model": "Alpha 7 III",
+      "SerialNumber": "A7III789012",
+      "PurchaseDate": "2021-07-10",
+      "Condition": "Excellent",
+      "Color": "Black"
+    },
+    {
+      "Name": "Canon Vixia HF G21",
+      "Type": "Camcorder",
+      "Model": "Vixia HF G21",
+      "SerialNumber": "G21C456789",
+      "PurchaseDate": "2020-12-05",
+      "Condition": "Fair",
+      "Color": "Silver"
+    },
+    {
+      "Name": "GoPro Hero 9",
+      "Type": "Action Camera",
+      "Model": "Hero 9",
+      "SerialNumber": "H9A234567",
+      "PurchaseDate": "2021-02-20",
+      "Condition": "Good",
+      "Color": "Black"
+    },
+    {
+      "Name": "BodyCam Pro 2",
+      "Type": "Body Camera",
+      "Model": "Pro 2",
+      "SerialNumber": "BCP234567",
+      "PurchaseDate": "2022-08-30",
+      "Condition": "Excellent",
+      "Color": "Gray"
+    },
+    {
+      "Name": "Manfrotto MT190XPRO4",
+      "Type": "Camera Stand",
+      "Model": "MT190XPRO4",
+      "SerialNumber": "MT19012345",
+      "PurchaseDate": "2019-06-12",
+      "Condition": "Very Good",
+      "Color": "Black"
+    },
+    {
+      "Name": "HDMI Cable (6ft)",
+      "Type": "Video Cable",
+      "Model": "N/A",
+      "SerialNumber": "HDMI67890",
+      "PurchaseDate": "2020-01-25",
+      "Condition": "Like New",
+      "Color": "Black"
+    },
+    {
+      "Name": "Epson PowerLite 1080p",
+      "Type": "Projector",
+      "Model": "PowerLite 1080p",
+      "SerialNumber": "EP1080P123",
+      "PurchaseDate": "2021-10-15",
+      "Condition": "Good",
+      "Color": "White"
+    },
+    {
+      "Name": "Nikon 24-70mm f/2.8 Lens",
+      "Type": "Camera Lens",
+      "Model": "24-70mm f/2.8",
+      "SerialNumber": "N24702",
+      "PurchaseDate": "2020-04-03",
+      "Condition": "Excellent",
+      "Brand": "Nikon"
+    },
+    {
+      "Name": "Aputure AL-M9 LED Light",
+      "Type": "Lighting Equipment",
+      "Model": "AL-M9",
+      "SerialNumber": "APLM90456",
+      "PurchaseDate": "2021-09-10",
+      "Condition": "Very Good",
+      "Brand": "Aputure"
+    },
+    {
+      "Name": "Rode VideoMic Pro+",
+      "Type": "Microphone",
+      "Model": "VideoMic Pro+",
+      "SerialNumber": "RVP12345",
+      "PurchaseDate": "2019-12-20",
+      "Condition": "Excellent",
+      "Brand": "Rode"
+    }
+  ]
+  
