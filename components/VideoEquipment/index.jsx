@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 import videoEquipment from '../../data/video_equipment.json';
+import StyledButton from '../Button';
 
 const StyledTable = styled.table`
   border-collapse: collapse;
@@ -23,6 +24,12 @@ const StyledTableHeaderCell = styled.th`
   border-bottom: 2px solid #837a7a;
 `;
 
+
+const StyledTableHeaderActioCell = styled.th`
+  padding: 10px;
+  border-bottom: 2px solid #837a7a;
+`;
+
 const StyledTableCell = styled.td`
   padding: 10px;
 `;
@@ -41,6 +48,7 @@ export default  function VideoEquipmentStyledTable() {
           <StyledTableHeaderCell>Color</StyledTableHeaderCell>
           <StyledTableHeaderCell>Availability</StyledTableHeaderCell>
           <StyledTableHeaderCell>Location</StyledTableHeaderCell>
+          <StyledTableHeaderCell>Manage Entries</StyledTableHeaderCell>
         </StyledTableRow>
       </StyledTableHeader>
       <tbody>
@@ -55,6 +63,7 @@ export default  function VideoEquipmentStyledTable() {
             <StyledTableCell>{item.Color || item.Brand}</StyledTableCell>
             <StyledTableCell>{item.Availability}</StyledTableCell>
             <StyledTableCell>{item.DepartmentLocation}</StyledTableCell>
+            <StyledTableCell><StyledButton  >EDIT</StyledButton></StyledTableCell>
           </StyledTableRow>
         ))}
       </tbody>
