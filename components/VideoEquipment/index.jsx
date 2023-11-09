@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import videoEquipment from '../../data/video_equipment.json';
+import videoEquipment from '../../database/video_equipment.json';
 import StyledButton from '../Button';
 
 const StyledTable = styled.table`
@@ -63,7 +63,7 @@ export default  function VideoEquipmentStyledTable() {
             <StyledTableCell>{item.Color || item.Brand}</StyledTableCell>
             <StyledTableCell>{item.Availability}</StyledTableCell>
             <StyledTableCell>{item.DepartmentLocation}</StyledTableCell>
-            <StyledTableCell><StyledButton  >EDIT</StyledButton></StyledTableCell>
+            <StyledTableCell><StyledButton >EDIT</StyledButton></StyledTableCell>
           </StyledTableRow>
         ))}
       </tbody>
