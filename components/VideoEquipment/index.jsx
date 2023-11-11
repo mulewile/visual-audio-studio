@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
-import videoEquipment from '../../database/video_equipment.json';
+//import videoEquipment from '../../database/video_equipment.json';
+import useSWR from "swr"
 import StyledButton from '../Button';
+import { useRouter } from "next/router";
 
 const StyledTable = styled.table`
   border-collapse: collapse;
@@ -35,6 +37,19 @@ const StyledTableCell = styled.td`
 `;
 
 export default  function VideoEquipmentStyledTable() {
+
+  const router = useRouter();
+  const { id } = router.query;
+  const { data, error } = useSWR(id ? `/api/equipments/${id}` : null);
+  if (error) {
+    console.error('Error fetching data:', error);
+    return <h1>Error loading data</h1>;
+  }
+
+  if (!data) {
+    console.log("data", data, id)
+    return <h1>Loading...</h1>;
+  }
   return (
     <StyledTable>
       <StyledTableHeader>
@@ -52,7 +67,7 @@ export default  function VideoEquipmentStyledTable() {
         </StyledTableRow>
       </StyledTableHeader>
       <tbody>
-        {videoEquipment.map((item) => (
+        {data.map((item) => (
           <StyledTableRow key={uuidv4()}>
             <StyledTableCell>{item.Name}</StyledTableCell>
             <StyledTableCell>{item.Type}</StyledTableCell>
