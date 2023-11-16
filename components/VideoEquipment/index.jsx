@@ -1,9 +1,6 @@
 import styled from 'styled-components';
-import { v4 as uuidv4 } from 'uuid';
-//import videoEquipment from '../../database/video_equipment.json';
 import useSWR from "swr"
 import StyledButton from '../Button';
-import { useRouter } from "next/router";
 
 const StyledTable = styled.table`
   border-collapse: collapse;
@@ -36,18 +33,18 @@ const StyledTableCell = styled.td`
   padding: 10px;
 `;
 
-export default  function VideoEquipmentStyledTable() {
+export default function VideoEquipmentStyledTable() {
 
-  const router = useRouter();
-  const { id } = router.query;
-  const { data, error } = useSWR(id ? `/api/equipments/${id}` : null);
+  const { data, error } = useSWR("/api/video" );
+ 
+
   if (error) {
     console.error('Error fetching data:', error);
     return <h1>Error loading data</h1>;
   }
 
   if (!data) {
-    console.log("data", data, id)
+    
     return <h1>Loading...</h1>;
   }
   return (
@@ -63,21 +60,21 @@ export default  function VideoEquipmentStyledTable() {
           <StyledTableHeaderCell>Color</StyledTableHeaderCell>
           <StyledTableHeaderCell>Availability</StyledTableHeaderCell>
           <StyledTableHeaderCell>Location</StyledTableHeaderCell>
-          <StyledTableHeaderCell>Manage Entries</StyledTableHeaderCell>
+          <StyledTableHeaderCell>Manage</StyledTableHeaderCell>
         </StyledTableRow>
       </StyledTableHeader>
       <tbody>
         {data.map((item) => (
-          <StyledTableRow key={uuidv4()}>
-            <StyledTableCell>{item.Name}</StyledTableCell>
-            <StyledTableCell>{item.Type}</StyledTableCell>
-            <StyledTableCell>{item.Model}</StyledTableCell>
-            <StyledTableCell>{item.SerialNumber}</StyledTableCell>
-            <StyledTableCell>{item.PurchaseDate}</StyledTableCell>
-            <StyledTableCell>{item.Condition}</StyledTableCell>
-            <StyledTableCell>{item.Color || item.Brand}</StyledTableCell>
-            <StyledTableCell>{item.Availability}</StyledTableCell>
-            <StyledTableCell>{item.DepartmentLocation}</StyledTableCell>
+          <StyledTableRow key={item._id}>
+            <StyledTableCell>{item.name}</StyledTableCell>
+            <StyledTableCell>{item.type}</StyledTableCell>
+            <StyledTableCell>{item.model}</StyledTableCell>
+            <StyledTableCell>{item.serialnumber}</StyledTableCell>
+            <StyledTableCell>{item.purchasedate}</StyledTableCell>
+            <StyledTableCell>{item.condition}</StyledTableCell>
+            <StyledTableCell>{item.color || item.brand}</StyledTableCell>
+            <StyledTableCell>{item.availability}</StyledTableCell>
+            <StyledTableCell>{item.departmentlocation}</StyledTableCell>
             <StyledTableCell><StyledButton >EDIT</StyledButton></StyledTableCell>
           </StyledTableRow>
         ))}
