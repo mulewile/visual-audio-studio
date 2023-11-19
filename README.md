@@ -1,31 +1,14 @@
-# AUDIO VISUAL STUDIO APP
+# **Audio Visual Studio App**
 
+The *Audio Visual Studio App* is a studio management application. It empowers users to efficiently manage their equipment inventory, facilitating seamless mantainance, hiring and usage processes.
 
+## Features:
 
-## Development
+1. **Equipment Overview:**
+   - Gain a overview of all audio and visual equipment within the studio.
+   - Access relevant details such as equipment type, model, serial number, and current availability.
 
-### Local Development
+2. **Inventory Management:**
+   - Efficiently organise and categorise equipment inventory for easy navigation.
+   - Track the status, condition, and location of each item.
 
-To work locally, please install the dependencies using `npm i` first.
-
-Run `npm run dev` to start a development server and open the displayed URL in a browser.
-
-Use `npm run test` to run the tests.
-
-### CodeSandbox Cloud
-
-Select the "Preview: 3000" tab to view this project.
-
-Select the "Tests: logs" tab to view the tests.
-
-> The `npm run dev` and `npm run test` scripts run automatically.
-
-### Scripts
-
-You can use the following commands:
-
-- `npm run dev` to start a development server
-- `npm run build` to build the project
-- `npm run start` to start a production server
-- `npm run test` to run the tests
-- `npm run lint` to run the linter
