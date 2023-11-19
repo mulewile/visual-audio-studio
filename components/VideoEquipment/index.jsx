@@ -34,6 +34,22 @@ const StyledTableCell = styled.td`
   padding: 10px;
 `;
 
+
+
+
+const ErrorContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+`;
+
+const ErrorMessage = styled.h1`
+  text-align: center;
+  color: red; 
+`;
+
+
 export default function VideoEquipmentStyledTable() {
   
 
@@ -41,8 +57,11 @@ export default function VideoEquipmentStyledTable() {
  
 
   if (error) {
-    console.error('Error fetching data:', error);
-    return <h1>Error loading data</h1>;
+    return (
+      <ErrorContainer>
+        <ErrorMessage>Error loading data: Administrator will connect to the database soon</ErrorMessage>
+      </ErrorContainer>
+    );
   }
 
   if (!data) {
