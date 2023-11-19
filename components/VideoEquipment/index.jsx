@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import useSWR from "swr"
 import StyledButton from '../Button';
+import Link from 'next/link';
 
 const StyledTable = styled.table`
   border-collapse: collapse;
@@ -34,6 +35,7 @@ const StyledTableCell = styled.td`
 `;
 
 export default function VideoEquipmentStyledTable() {
+  
 
   const { data, error } = useSWR("/api/video" );
  
@@ -60,6 +62,7 @@ export default function VideoEquipmentStyledTable() {
           <StyledTableHeaderCell>Color</StyledTableHeaderCell>
           <StyledTableHeaderCell>Availability</StyledTableHeaderCell>
           <StyledTableHeaderCell>Location</StyledTableHeaderCell>
+          <StyledTableHeaderCell>Details</StyledTableHeaderCell>
           <StyledTableHeaderCell>Manage</StyledTableHeaderCell>
         </StyledTableRow>
       </StyledTableHeader>
@@ -75,7 +78,8 @@ export default function VideoEquipmentStyledTable() {
             <StyledTableCell>{item.color || item.brand}</StyledTableCell>
             <StyledTableCell>{item.availability}</StyledTableCell>
             <StyledTableCell>{item.departmentlocation}</StyledTableCell>
-            <StyledTableCell><StyledButton >EDIT</StyledButton></StyledTableCell>
+            <StyledTableCell><Link href={`/video/${item._id}`}><StyledButton >SHOW</StyledButton></Link></StyledTableCell>
+            <StyledTableCell><StyledButton>EDIT</StyledButton></StyledTableCell>
           </StyledTableRow>
         ))}
       </tbody>

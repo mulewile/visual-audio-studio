@@ -17,7 +17,6 @@ export default function HomePage() {
     <div>
       <StyledHeader>Visual Audio Studio</StyledHeader>
       <VideoEquipmentStyledTable/>
-      <Footer/>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledFooter = styled.footer`
-  background: #0a1828;
+  background: #1c1e1f;
   color: #fff;
   padding: 10px;
   text-align: center;
@@ -9,6 +9,9 @@ const StyledFooter = styled.footer`
   font-weight: bold;
   text-transform: uppercase;
   letter-spacing: 1px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 `;
 
 const Footer = () => {
