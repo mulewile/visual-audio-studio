@@ -39,13 +39,13 @@ export const StyledLink = styled.a`
 
 const technicalDetails = " TECHNICAL DETAILS";
 const appearanceDetail = "APPEARANCE DETAILS";
-const linkText = "VIDEO EQUIPMENT";
+const linkText = "AUDIO EQUIPMENT";
 
 export default function Details() {
   const router = useRouter();
   const { id } = router.query;
 
-  const { data: video, error } = useSWR(id ? `/api/video/${id}` : null);
+  const { data: video, error } = useSWR(id ? `/api/audio/${id}` : null);
 
   if (!video) {
     return <p>Loading...</p>;
@@ -54,7 +54,7 @@ export default function Details() {
   return (
     <>
       <StyledHeader>Video Equipment Details</StyledHeader>
-      <StyledLink href={"/videoEquip"}>{linkText}</StyledLink>
+      <StyledLink href={"/audioEquip"}>{linkText}</StyledLink>
       <StyledItemCardContainer>
         <StyledItemCard>
           <h2>{video.name}</h2>
