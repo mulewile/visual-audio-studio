@@ -9,6 +9,7 @@ const StyledTable = styled.table`
   font-size: 16px;
   color: #333;
   margin-top: 70px;
+  height: 5vh;
 `;
 
 const StyledTableHeader = styled.thead`
@@ -32,6 +33,7 @@ const StyledTableHeaderActioCell = styled.th`
 
 const StyledTableCell = styled.td`
   padding: 10px;
+  background-color: whitesmoke;
 `;
 
 
@@ -98,7 +100,7 @@ export default function VideoEquipmentStyledTable() {
             <StyledTableCell>{item.availability}</StyledTableCell>
             <StyledTableCell>{item.departmentlocation}</StyledTableCell>
             <StyledTableCell><Link href={`/video/${item._id}`}><StyledButton >SHOW</StyledButton></Link></StyledTableCell>
-            <StyledTableCell><StyledButton>EDIT</StyledButton></StyledTableCell>
+            <StyledTableCell><StyledButton disabled={true} >EDIT</StyledButton></StyledTableCell>
           </StyledTableRow>
         ))}
       </tbody>

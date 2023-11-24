@@ -98,7 +98,7 @@ export default function AudioEquipmentStyledTable() {
             <StyledTableCell>{item.availability}</StyledTableCell>
             <StyledTableCell>{item.departmentlocation}</StyledTableCell>
             <StyledTableCell><Link href={`/audio/${item._id}`}><StyledButton >SHOW</StyledButton></Link></StyledTableCell>
-            <StyledTableCell><StyledButton>EDIT</StyledButton></StyledTableCell>
+            <StyledTableCell><StyledButton disabled={true}>EDIT</StyledButton></StyledTableCell>
           </StyledTableRow>
         ))}
       </tbody>

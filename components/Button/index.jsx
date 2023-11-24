@@ -30,6 +30,7 @@ const StyledButton = styled.button`
     background-color: #cccccc;
     color: #777777;
     cursor: not-allowed;
+    pointer-events: none;
   }
 `;
 
