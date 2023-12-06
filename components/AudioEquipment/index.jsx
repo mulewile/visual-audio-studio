@@ -32,6 +32,7 @@ const StyledTableHeaderActioCell = styled.th`
 
 const StyledTableCell = styled.td`
   padding: 10px;
+  background-color: #f2f2f2;
 `;
 
 

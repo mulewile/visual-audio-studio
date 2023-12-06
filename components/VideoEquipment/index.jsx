@@ -25,18 +25,10 @@ const StyledTableHeaderCell = styled.th`
   border-bottom: 2px solid #837a7a;
 `;
 
-
-const StyledTableHeaderActioCell = styled.th`
-  padding: 10px;
-  border-bottom: 2px solid #837a7a;
-`;
-
 const StyledTableCell = styled.td`
   padding: 10px;
   background-color: whitesmoke;
 `;
-
-
 
 
 const ErrorContainer = styled.div`
