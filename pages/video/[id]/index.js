@@ -19,6 +19,11 @@ export const backgroundStyle = {
   alignItems: "center",
   justifyContent: "flex-start",
   alignItems: "center",
+
+  "@media (max-width: 768px)": {
+    backgroundSize: "contain",
+    width: "auto",
+  },
 };
 
 const StyledItemCardContainer = styled.div`
@@ -63,21 +68,7 @@ export default function Details() {
     return <p>Error loading data...</p>;
   }
   if (!video) {
-    return (
-      <>
-        <button class="btn btn-primary" type="button" disabled>
-          <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-          <span class="visually-hidden" role="status">
-            Loading video details....
-          </span>
-        </button>
-        <button class="btn btn-primary" type="button" disabled>
-          <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
-          <span role="status">Loading video details....</span>
-        </button>
-        ;
-      </>
-    );
+    return <p>Loading video details....</p>;
   }
   const HEADERTEXT = `${video.name} Details`;
 

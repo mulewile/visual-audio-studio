@@ -3,13 +3,20 @@ import useSWR from "swr";
 import StyledButton from "../Button";
 import Link from "next/link";
 
+const TableContainer = styled.div`
+  overflow: auto;
+`;
+
 const StyledTable = styled.table`
   border-collapse: collapse;
   width: 100%;
   font-size: 16px;
   color: #333;
   margin-top: 70px;
-  height: 5vh;
+
+  @media (max-width: 768px) {
+    font-size: 14px;
+  }
 `;
 
 const StyledTableHeader = styled.thead`
@@ -59,31 +66,33 @@ export default function CustomerDetailsStyledTable() {
     return <h1>Loading...</h1>;
   }
   return (
-    <StyledTable>
-      <StyledTableHeader>
-        <StyledTableRow>
-          <StyledTableHeaderCell>Name</StyledTableHeaderCell>
-          <StyledTableHeaderCell>Address</StyledTableHeaderCell>
-          <StyledTableHeaderCell>Details</StyledTableHeaderCell>
-          <StyledTableHeaderCell>Manage</StyledTableHeaderCell>
-        </StyledTableRow>
-      </StyledTableHeader>
-      <tbody>
-        {data.map((item) => (
-          <StyledTableRow key={item._id}>
-            <StyledTableCell>{item.company_name}</StyledTableCell>
-            <StyledTableCell>{`${item.address.street}, ${item.address.city}, ${item.address.state} ${item.address.zip_code}`}</StyledTableCell>
-            <StyledTableCell>
-              <Link href={`/customer/${item._id}`}>
-                <StyledButton>SHOW</StyledButton>
-              </Link>
-            </StyledTableCell>
-            <StyledTableCell>
-              <StyledButton disabled={true}>EDIT</StyledButton>
-            </StyledTableCell>
+    <TableContainer>
+      <StyledTable>
+        <StyledTableHeader>
+          <StyledTableRow>
+            <StyledTableHeaderCell>Name</StyledTableHeaderCell>
+            <StyledTableHeaderCell>Address</StyledTableHeaderCell>
+            <StyledTableHeaderCell>Details</StyledTableHeaderCell>
+            <StyledTableHeaderCell>Manage</StyledTableHeaderCell>
           </StyledTableRow>
-        ))}
-      </tbody>
-    </StyledTable>
+        </StyledTableHeader>
+        <tbody>
+          {data.map((item) => (
+            <StyledTableRow key={item._id}>
+              <StyledTableCell>{item.company_name}</StyledTableCell>
+              <StyledTableCell>{`${item.address.street}, ${item.address.city}, ${item.address.state} ${item.address.zip_code}`}</StyledTableCell>
+              <StyledTableCell>
+                <Link href={`/customer/${item._id}`}>
+                  <StyledButton>SHOW</StyledButton>
+                </Link>
+              </StyledTableCell>
+              <StyledTableCell>
+                <StyledButton disabled={true}>EDIT</StyledButton>
+              </StyledTableCell>
+            </StyledTableRow>
+          ))}
+        </tbody>
+      </StyledTable>
+    </TableContainer>
   );
 }

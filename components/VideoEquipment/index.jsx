@@ -3,6 +3,10 @@ import useSWR from "swr"
 import StyledButton from '../Button';
 import Link from 'next/link';
 
+const TableContainer = styled.div`
+  overflow: auto;
+`;
+
 const StyledTable = styled.table`
   border-collapse: collapse;
   width: 100%;
@@ -10,7 +14,11 @@ const StyledTable = styled.table`
   color: #333;
   margin-top: 70px;
   height: 5vh;
+  @media (max-width: 768px) {
+    font-size: 14px; 
+  }
 `;
+
 
 const StyledTableHeader = styled.thead`
   background-color: #f2f2f2;
@@ -63,6 +71,7 @@ export default function VideoEquipmentStyledTable() {
     return <h1>Loading...</h1>;
   }
   return (
+  <TableContainer>
     <StyledTable>
       <StyledTableHeader>
       <StyledTableRow>
@@ -97,6 +106,7 @@ export default function VideoEquipmentStyledTable() {
         ))}
       </tbody>
     </StyledTable>
+  </TableContainer>
   );
 }
 
