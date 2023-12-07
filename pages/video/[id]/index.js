@@ -63,7 +63,21 @@ export default function Details() {
     return <p>Error loading data...</p>;
   }
   if (!video) {
-    return <p>Loading...</p>;
+    return (
+      <>
+        <button class="btn btn-primary" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+          <span class="visually-hidden" role="status">
+            Loading video details....
+          </span>
+        </button>
+        <button class="btn btn-primary" type="button" disabled>
+          <span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>
+          <span role="status">Loading video details....</span>
+        </button>
+        ;
+      </>
+    );
   }
   const HEADERTEXT = `${video.name} Details`;
 

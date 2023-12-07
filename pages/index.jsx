@@ -7,6 +7,7 @@ import useSWR from "swr"
 import StyledButton from './../components/Button';
 import { useRouter } from "next/router";
 import { StyledLink } from "./video/[id]";
+import { Button } from "react-bootstrap";
 import Image from "next/image";
 import Link from "next/link";
 import myVideoImage from "../resources/videocamera.png";
@@ -14,6 +15,7 @@ import myVideoImage from "../resources/videocamera.png";
 
 const videoLinkText = "Video Equipment";
 const audioLinkText = "Audio Equipment";
+const customerLinkText = "Customer Details";
 
 export const backgroundStyle = {
   backgroundImage: `url(${myVideoImage.src})`,
@@ -34,6 +36,7 @@ export default function HomePage() {
       <StyledHeader>Visual Audio Studio</StyledHeader>
       <StyledLink href={"/videoEquip"}>{videoLinkText}</StyledLink>
       <StyledLink href={"/audioEquip"}>{audioLinkText}</StyledLink>
+      <StyledLink href={"/customerList"}>{customerLinkText}</StyledLink>
     </div>
   );
 }

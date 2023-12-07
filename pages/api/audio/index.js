@@ -9,7 +9,9 @@ export default async function handler(request, response) {
 
       return response.status(200).json(audios);
     } else {
-      return response.status(405).json({ message: "Method not allowed" });
+      return response
+        .status(405)
+        .json({ message: "Method not allowed audio Details" });
     }
   } catch (error) {
     console.error("Error in handler:", error);

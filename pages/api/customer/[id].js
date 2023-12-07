@@ -1,25 +1,25 @@
 import dbConnect from "@/database/connect";
-import Video from "../../../database/models/Video";
+import Customers from "@/database/models/Customer";
 
 export default async function handler(request, response) {
   try {
     await dbConnect();
-
     const { id } = request.query;
 
     if (request.method === "GET") {
-      const videoEquipment = await Video.findById(id);
+      const customerDetails = await Customers.findById(id);
 
-      if (!videoEquipment) {
+      if (!customerDetails) {
         return response
           .status(404)
-          .json({ status: "error", message: "Video equipment not found" });
+          .json({ status: "error", message: "Customer details not found" });
       }
-      return response.status(200).json(videoEquipment);
+      return response.status(200).json(customerDetails);
     } else {
-      return response
-        .status(405)
-        .json({ status: "error", message: "Method not allowed video id" });
+      return response.status(405).json({
+        status: "error",
+        message: "Method not allowed for getting customer id",
+      });
     }
   } catch (error) {
     console.error("Error in handler:", error);
