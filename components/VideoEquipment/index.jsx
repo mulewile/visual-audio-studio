@@ -3,26 +3,31 @@ import useSWR from "swr"
 import StyledButton from '../Button';
 import Link from 'next/link';
 
-const TableContainer = styled.div`
+
+export const TableContainer = styled.div`
   overflow: auto;
+  height: 65vh;
 `;
 
 const StyledTable = styled.table`
   border-collapse: collapse;
   width: 100%;
+
+  display: block;
   font-size: 16px;
   color: #333;
-  margin-top: 70px;
-  height: 5vh;
   @media (max-width: 768px) {
-    font-size: 14px; 
+    font-size: 14px;
   }
 `;
 
-
 const StyledTableHeader = styled.thead`
   background-color: #f2f2f2;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 `;
+
 
 const StyledTableRow = styled.tr`
   border-bottom: 1px solid #ddd;
@@ -101,7 +106,7 @@ export default function VideoEquipmentStyledTable() {
             <StyledTableCell>{item.availability}</StyledTableCell>
             <StyledTableCell>{item.departmentlocation}</StyledTableCell>
             <StyledTableCell><Link href={`/video/${item._id}`}><StyledButton >SHOW</StyledButton></Link></StyledTableCell>
-            <StyledTableCell><StyledButton disabled={true} >EDIT</StyledButton></StyledTableCell>
+            <StyledTableCell><Link href={`/edit`}><StyledButton disabled={false} >EDIT</StyledButton></Link></StyledTableCell>
           </StyledTableRow>
         ))}
       </tbody>

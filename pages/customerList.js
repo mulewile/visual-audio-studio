@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { StyledLink } from "./customer/[id]";
 import myVideoImage from "../resources/kunde.png";
+import { TableContainer } from "@/components/customerDetails";
 
 const linkText = "MENU VIEW";
 
@@ -31,10 +32,10 @@ export default function customerDetails() {
   return (
     <div style={backgroundStyle}>
       <StyledHeader>{customerViewHeader}</StyledHeader>
-
       <StyledLink href={"/"}>{linkText}</StyledLink>
-
-      <CustomerDetailsStyledTable />
+      <TableContainer>
+        <CustomerDetailsStyledTable />
+      </TableContainer>
     </div>
   );
 }
