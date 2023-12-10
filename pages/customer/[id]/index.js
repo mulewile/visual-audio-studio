@@ -58,7 +58,7 @@ export default function Details() {
 
   const { data: customer, error } = useSWR(id ? `/api/customer/${id}` : null);
   if (error) {
-    return <p>Error loading data customer data...</p>;
+    return <p>Error loading customer data...</p>;
   }
   if (!customer) {
     return (

@@ -25,6 +25,7 @@ export default function Edit() {
       <StyledFormContainer>
         <Form>
           <FormTitle>Video Details Form</FormTitle>
+
           <label htmlFor="videoNameInput"> Name</label>
           <input id="videoNameInput" name="name" />
           <label htmlFor="videoTypeInput">Type</label>

@@ -65,7 +65,7 @@ export default function Details() {
 
   const { data: video, error } = useSWR(id ? `/api/video/${id}` : null);
   if (error) {
-    return <p>Error loading data...</p>;
+    return <p>Error loading video data...</p>;
   }
   if (!video) {
     return <p>Loading video details....</p>;

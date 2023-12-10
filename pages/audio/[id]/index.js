@@ -59,10 +59,10 @@ export default function Details() {
 
   const { data: audio, error } = useSWR(id ? `/api/audio/${id}` : null);
   if (error) {
-    return <p>Error loading data...</p>;
+    return <p>Error loading audio data...</p>;
   }
   if (!audio) {
-    return <p>Loading...</p>;
+    return <p>Loading audio equipment...</p>;
   }
   const HEADERTEXT = `${audio.name} Details`;
 
