@@ -33,7 +33,9 @@ export default function VideoEquipment() {
       <StyledHeader>{videoViewHeader}</StyledHeader>
 
       <StyledLink href={"/"}>{linkText}</StyledLink>
-
+      <Link href={`/add`}>
+        <StyledButton disabled={true}>Add</StyledButton>
+      </Link>
       <VideoEquipmentStyledTable />
     </div>
   );
