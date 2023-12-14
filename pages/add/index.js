@@ -41,53 +41,32 @@ function generateUniqueId() {
   return uuidv4();
 }
 
-async function addVideoToAPI(videoData) {
-  try {
-    const id = generateUniqueId();
-    const videoWithId = { ...videoData, id };
-    const isSuccess = await postVideoToAPI(videoWithId);
-    console.log("videoWithId", videoWithId);
-    return isSuccess;
-  } catch (error) {
-    console.error("An error occurred while adding the video equipment:", error);
-    return false;
-  }
+function addVideoToAPI(videoData) {
+  const id = generateUniqueId();
+  const videoWithId = { ...videoData, id };
+  postVideoToAPI(videoWithId);
+  console.log("videoWithId", videoWithId);
+}
+function handleSubmit(event) {
+  event.preventDefault();
+
+  const formData = new FormData(event.target);
+  const videoObject = Object.fromEntries(formData);
+  console.log("videoObject", videoObject);
+
+  addVideoToAPI(videoObject);
+  console.log("videoData", videoObject);
 }
 
 export default function Add() {
   const linkText = "Cancel";
   const router = useRouter();
 
-  async function handleSubmit(event) {
-    event.preventDefault();
-
-    const formData = new FormData(event.target);
-    const videoObject = Object.fromEntries(formData);
-
-    try {
-      const isSuccess = await addVideoToAPI(videoObject);
-      console.log("videoData", videoObject);
-      if (isSuccess) {
-        router.push("/videoEquip");
-      } else {
-        console.error(
-          "Failed to add the video equipment. Please try again later."
-        );
-      }
-    } catch (error) {
-      console.error(
-        "An error occurred while adding the video equipment:",
-        error
-      );
-    }
-  }
-
   return (
     <div style={backgroundStyle}>
       <StyledFormContainer>
         <Form onSubmit={handleSubmit}>
           <FormTitle>Video Details Form</FormTitle>
-
           <label htmlFor="videoNameInput"> Name</label>
           <input id="videoNameInput" name="name" />
           <label htmlFor="videoTypeInput">Type</label>
@@ -104,7 +83,7 @@ export default function Add() {
           <input id="videoColorInput" name="color" />
           <label htmlFor="videoAvailabilityInput">Availability</label>
           <input id="videoAvailabilityInput" name="availability" />
-          <Button type="submit" disabled={false} onSubmit={handleSubmit}>
+          <Button type="submit" disabled={false}>
             Submit
           </Button>
           <StyledLink href={"/videoEquip"}>{linkText}</StyledLink>
