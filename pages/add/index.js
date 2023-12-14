@@ -46,7 +46,7 @@ async function addVideoToAPI(videoData) {
     const id = generateUniqueId();
     const videoWithId = { ...videoData, id };
     const isSuccess = await postVideoToAPI(videoWithId);
-
+    console.log("videoWithId", videoWithId);
     return isSuccess;
   } catch (error) {
     console.error("An error occurred while adding the video equipment:", error);
@@ -58,10 +58,15 @@ export default function Add() {
   const linkText = "Cancel";
   const router = useRouter();
 
-  const handleSubmit = async (videoData) => {
-    try {
-      const isSuccess = await addVideoToAPI(videoData);
+  async function handleSubmit(event) {
+    event.preventDefault();
 
+    const formData = new FormData(event.target);
+    const videoObject = Object.fromEntries(formData);
+
+    try {
+      const isSuccess = await addVideoToAPI(videoObject);
+      console.log("videoData", videoObject);
       if (isSuccess) {
         router.push("/videoEquip");
       } else {
@@ -75,12 +80,12 @@ export default function Add() {
         error
       );
     }
-  };
+  }
 
   return (
     <div style={backgroundStyle}>
       <StyledFormContainer>
-        <Form onSubmit={handleSubmit()}>
+        <Form onSubmit={handleSubmit}>
           <FormTitle>Video Details Form</FormTitle>
 
           <label htmlFor="videoNameInput"> Name</label>
