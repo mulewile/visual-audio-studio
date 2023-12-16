@@ -20,49 +20,55 @@ export const backgroundStyle = {
   alignItems: "center",
 };
 
-async function postVideoToAPI(videoData) {
-  try {
-    const response = await fetch("/api/video", {
-      method: "POST",
-      body: JSON.stringify(videoData),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-
-    return response.ok;
-  } catch (error) {
-    console.error("An error occurred:", error);
-    return false;
-  }
-}
-
-function generateUniqueId() {
-  return uuidv4();
-}
-
-function addVideoToAPI(videoData) {
-  const id = generateUniqueId();
-  const videoWithId = { ...videoData, id };
-  postVideoToAPI(videoWithId);
-  console.log("videoWithId", videoWithId);
-}
-
-function handleSubmit(event) {
-  console.log("Event:", event);
-  event.preventDefault();
-
-  const formData = new FormData(event.target);
-  const videoObject = Object.fromEntries(formData);
-  console.log("videoObject", videoObject);
-
-  addVideoToAPI(videoObject);
-  console.log("videoData", videoObject);
-}
-
 export default function Add() {
   const linkText = "Cancel";
+
   const router = useRouter();
+
+  async function postVideoToAPI(videoData) {
+    try {
+      const response = await fetch("/api/video", {
+        method: "POST",
+        body: JSON.stringify(videoData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      return response.ok;
+    } catch (error) {
+      console.error("An error occurred:", error);
+      return false;
+    }
+  }
+
+  function generateUniqueId() {
+    return uuidv4();
+  }
+
+  async function addVideoToAPI(videoData) {
+    const id = generateUniqueId();
+    const videoWithId = { ...videoData, id };
+    // postVideoToAPI(videoWithId);
+    const isSuccess = await postVideoToAPI(videoWithId);
+
+    if (isSuccess) {
+      router.push("/videoEquip");
+      console.log("videoWithId", videoWithId);
+    }
+  }
+
+  function handleSubmit(event) {
+    console.log("Event:", event);
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+    const videoObject = Object.fromEntries(formData);
+    console.log("videoObject", videoObject);
+
+    addVideoToAPI(videoObject);
+    console.log("videoData", videoObject);
+  }
 
   return (
     <div style={backgroundStyle}>
@@ -70,21 +76,86 @@ export default function Add() {
         <Form onSubmit={handleSubmit}>
           <FormTitle>Video Details Form</FormTitle>
           <label htmlFor="videoNameInput"> Name</label>
-          <input id="videoNameInput" name="name" />
+          <input
+            id="videoNameInput"
+            name="name"
+            required
+            aria-label="Name"
+            placeholder="Enter video equipment name"
+          />
+
           <label htmlFor="videoTypeInput">Type</label>
-          <input id="videoTypeInput" name="type" />
+          <input
+            id="videoTypeInput"
+            name="type"
+            required
+            aria-label="Type"
+            placeholder="e.g., Documentary"
+          />
+
           <label htmlFor="videoModelInput"> Model</label>
-          <input id="videoModelInput" name="model" />
+          <input
+            id="videoModelInput"
+            name="model"
+            required
+            aria-label="Model"
+            placeholder="Enter the model"
+          />
+
           <label htmlFor="videoSerialNumberInput">Serial Number</label>
-          <input id="videoSerialNumberInput" name="serialnumber" />
+          <input
+            id="videoSerialNumberInput"
+            name="serialnumber"
+            required
+            aria-label="Serial Number"
+            placeholder="Enter the serial number"
+          />
+
           <label htmlFor="videoPurchaseDateInput"> Purchase Date</label>
-          <input id="videoPurchaseDateInput" name="purchasedate" />
+          <input
+            id="videoPurchaseDateInput"
+            name="purchasedate"
+            type="date"
+            required
+            aria-label="Purchase Date"
+          />
+
           <label htmlFor="videoConditionInput">Condition</label>
-          <input id="videoConditionInput" name="condition" />
+          <input
+            id="videoConditionInput"
+            name="condition"
+            required
+            aria-label="Condition"
+            placeholder="e.g., Good, Excellent, etc."
+          />
+
           <label htmlFor="videoColorInput">Color</label>
-          <input id="videoColorInput" name="color" />
+          <input
+            id="videoColorInput"
+            name="color"
+            required
+            aria-label="Color"
+            placeholder="Enter the color"
+          />
+
           <label htmlFor="videoAvailabilityInput">Availability</label>
-          <input id="videoAvailabilityInput" name="availability" />
+          <input
+            id="videoAvailabilityInput"
+            name="availability"
+            required
+            aria-label="Availability"
+            placeholder="Enter the availability status"
+          />
+
+          <label htmlFor="videoDepartmentlocationInput">Location</label>
+          <input
+            id="videoDepartmentlocationInput"
+            name="departmentlocation"
+            required
+            aria-label="Location"
+            placeholder="Enter the location"
+          />
+
           <Button type="submit" disabled={false}>
             Submit
           </Button>
