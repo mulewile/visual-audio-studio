@@ -79,7 +79,6 @@ export default function Add() {
           <input
             id="videoNameInput"
             name="name"
-            required
             aria-label="Name"
             placeholder="Enter video equipment name"
           />
@@ -88,7 +87,6 @@ export default function Add() {
           <input
             id="videoTypeInput"
             name="type"
-            required
             aria-label="Type"
             placeholder="e.g., Documentary"
           />
@@ -97,7 +95,6 @@ export default function Add() {
           <input
             id="videoModelInput"
             name="model"
-            required
             aria-label="Model"
             placeholder="Enter the model"
           />
@@ -106,7 +103,6 @@ export default function Add() {
           <input
             id="videoSerialNumberInput"
             name="serialnumber"
-            required
             aria-label="Serial Number"
             placeholder="Enter the serial number"
           />
@@ -116,7 +112,6 @@ export default function Add() {
             id="videoPurchaseDateInput"
             name="purchasedate"
             type="date"
-            required
             aria-label="Purchase Date"
           />
 
@@ -124,7 +119,6 @@ export default function Add() {
           <input
             id="videoConditionInput"
             name="condition"
-            required
             aria-label="Condition"
             placeholder="e.g., Good, Excellent, etc."
           />
@@ -133,7 +127,6 @@ export default function Add() {
           <input
             id="videoColorInput"
             name="color"
-            required
             aria-label="Color"
             placeholder="Enter the color"
           />
@@ -142,7 +135,6 @@ export default function Add() {
           <input
             id="videoAvailabilityInput"
             name="availability"
-            required
             aria-label="Availability"
             placeholder="Enter the availability status"
           />
@@ -151,7 +143,6 @@ export default function Add() {
           <input
             id="videoDepartmentlocationInput"
             name="departmentlocation"
-            required
             aria-label="Location"
             placeholder="Enter the location"
           />
