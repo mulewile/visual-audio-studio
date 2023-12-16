@@ -7,8 +7,10 @@ export default async function handler(request, response) {
 
     if (request.method === "GET") {
       const videos = await Video.find();
+      console.log("Hello Get");
       return response.status(200).json(videos);
     } else if (request.method === "POST") {
+      console.log("Hello pos5#t");
       const videoData = request.body;
       const video = await Video.create(videoData);
       response.status(201).json({ status: "Video created", video });

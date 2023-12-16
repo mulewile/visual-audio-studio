@@ -47,7 +47,9 @@ function addVideoToAPI(videoData) {
   postVideoToAPI(videoWithId);
   console.log("videoWithId", videoWithId);
 }
+
 function handleSubmit(event) {
+  console.log("Event:", event);
   event.preventDefault();
 
   const formData = new FormData(event.target);

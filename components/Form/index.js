@@ -42,6 +42,6 @@ export const FormTitle = styled.h2`
   color: #333;
 `;
 
-export default function Form({ children }) {
-  return <StyledForm>{children}</StyledForm>;
+export default function Form({ onSubmit, children }) {
+  return <StyledForm onSubmit={onSubmit}>{children}</StyledForm>;
 }
