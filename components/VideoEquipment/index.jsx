@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import useSWR from "swr"
 import StyledButton from '../Button';
 import Link from 'next/link';
-
+import LoadingComponent from '../LoadingHeader';
 
 export const TableContainer = styled.div`
   overflow: auto;
@@ -66,14 +66,14 @@ export default function VideoEquipmentStyledTable() {
   if (error) {
     return (
       <ErrorContainer>
-        <ErrorMessage>Error loading data: Administrator will connect to the database soon</ErrorMessage>
+        <ErrorMessage>Error loading data: Administrator will connect to the database soon{error.message}</ErrorMessage>
       </ErrorContainer>
     );
   }
 
   if (!data) {
     
-    return <h1>Loading...</h1>;
+    return <LoadingComponent/>;
   }
   return (
   <TableContainer>

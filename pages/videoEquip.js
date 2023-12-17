@@ -24,6 +24,7 @@ export const backgroundStyle = {
   alignItems: "center",
   justifyContent: "flex-start",
   alignItems: "center",
+  gap: "1rem",
 };
 
 const videoViewHeader = "Video Equipment";
