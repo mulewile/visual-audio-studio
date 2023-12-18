@@ -34,8 +34,14 @@ export default function Add() {
           "Content-Type": "application/json",
         },
       });
+      const responseData = await response.json();
 
-      return response.ok;
+      if (response.ok) {
+        return response.ok;
+      } else if (!response.ok) {
+        console.log(responseData.error);
+        return;
+      }
     } catch (error) {
       console.error("An error occurred:", error);
       return false;
@@ -49,12 +55,11 @@ export default function Add() {
   async function addVideoToAPI(videoData) {
     const id = generateUniqueId();
     const videoWithId = { ...videoData, id };
-    // postVideoToAPI(videoWithId);
+
     const isSuccess = await postVideoToAPI(videoWithId);
 
     if (isSuccess) {
       router.push("/videoEquip");
-      console.log("videoWithId", videoWithId);
     }
   }
 

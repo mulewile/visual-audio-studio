@@ -9,13 +9,16 @@ export default async function handler(request, response) {
 
     if (request.method === "GET") {
       const videoEquipment = await Video.findById(id);
-
       if (!videoEquipment) {
         return response
           .status(404)
           .json({ status: "error", message: "Video equipment not found" });
       }
-      return response.status(200).json(videoEquipment);
+      console.log("response", `"Video with id ${id} found."`);
+      return response.status(200).json(videoEquipment, {
+        status: "success",
+        message: `"Video with id ${id} found."`,
+      });
     } else {
       return response
         .status(405)
