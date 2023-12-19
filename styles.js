@@ -12,4 +12,7 @@ export default createGlobalStyle`
     font-family: system-ui;
     //background-color: black;
   }
+
+
+
 `;

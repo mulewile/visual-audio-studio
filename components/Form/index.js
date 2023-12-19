@@ -6,7 +6,6 @@ export const StyledFormContainer = styled.div`
 `;
 
 export const StyledForm = styled.form`
-  max-width: 400px;
   margin: 0 auto;
   padding: 20px;
   background-color: #f4f4f4;
@@ -22,17 +21,26 @@ export const StyledForm = styled.form`
 
   input {
     width: 100%;
-    padding: 8px;
+    padding: 10px;
     margin-bottom: 16px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    border: none;
+
     box-sizing: border-box;
+    background-color: #f4f4f4;
+    border-bottom: 1px solid grey;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+
+    &:focus {
+      outline: none;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
   }
 
   fieldset {
-    border: none;
-    padding: 0;
-    margin: 0;
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #f5f5f5;
   }
 `;
 
