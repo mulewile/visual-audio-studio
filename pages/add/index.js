@@ -6,6 +6,7 @@ import myEditImage from "../../resources/edit.png";
 import { StyledLink } from "../video/[id]";
 import { useRouter } from "next/router";
 import { v4 as uuidv4 } from "uuid";
+import StyledErrorMessage from "@/components/ErrorMessage";
 
 export const backgroundStyle = {
   backgroundImage: `url(${myEditImage.src})`,
@@ -21,9 +22,9 @@ export const backgroundStyle = {
 };
 
 export default function Add() {
-  const linkText = "Cancel";
+  const [errorMessage, setErrorMessage] = useState(null);
 
-  const router = useRouter();
+  const linkText = "Cancel";
 
   async function postVideoToAPI(videoData) {
     try {
@@ -37,13 +38,16 @@ export default function Add() {
       const responseData = await response.json();
 
       if (response.ok) {
+        router.push("/videoEquip");
         return response.ok;
       } else if (!response.ok) {
         console.log(responseData.error);
+        setErrorMessage(responseData.error);
         return;
       }
     } catch (error) {
       console.error("An error occurred:", error);
+      setErrorMessage("An unexpected error occurred");
       return false;
     }
   }
@@ -57,10 +61,6 @@ export default function Add() {
     const videoWithId = { ...videoData, id };
 
     const isSuccess = await postVideoToAPI(videoWithId);
-
-    if (isSuccess) {
-      router.push("/videoEquip");
-    }
   }
 
   function handleSubmit(event) {
@@ -79,6 +79,9 @@ export default function Add() {
     <div style={backgroundStyle}>
       <StyledFormContainer>
         <Form onSubmit={handleSubmit}>
+          {errorMessage && (
+            <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
+          )}
           <FormTitle>Video Details Form</FormTitle>
           <label htmlFor="videoNameInput"> Name</label>
           <input
