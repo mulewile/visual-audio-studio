@@ -66,7 +66,8 @@ export default function VideoEquipmentStyledTable() {
   if (error) {
     return (
       <ErrorContainer>
-        <ErrorMessage>Error loading data: Administrator will connect to the database soon{error.message}</ErrorMessage>
+        <ErrorMessage>Error loading data: Administrator will connect to the database soon</ErrorMessage>
+        <ErrorMessage>{error.message}</ErrorMessage>
       </ErrorContainer>
     );
   }
