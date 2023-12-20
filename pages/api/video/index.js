@@ -33,22 +33,21 @@ export default async function handler(request, response) {
         availability,
         departmentlocation,
       } = videoData;
-
+      const existingVideo = await Video.findOne({ serialnumber });
       if (name === "") {
         console.error("Validation error: Please provide a valid name");
 
         return response
           .status(HTTP_STATUS_BAD_REQUEST)
           .json({ error: "Please provide a valid name" });
-      } else {
-        console.info("Name is valid:", name);
       }
+
       if (type === "") {
         console.error("Validation error: Please provide a valid type");
 
-        return response
-          .status(HTTP_STATUS_BAD_REQUEST)
-          .json({ error: "Please provide a valid type" });
+        return response.status(HTTP_STATUS_BAD_REQUEST).json({
+          error: `"Please provide a valid type"`,
+        });
       } else {
         console.info("Type is valid:", type);
       }
@@ -71,6 +70,12 @@ export default async function handler(request, response) {
         return response
           .status(HTTP_STATUS_BAD_REQUEST)
           .json({ error: "Please provide a valid serial number input" });
+      }
+      if (serialnumber === existingVideo.serialnumber) {
+        return response.status(HTTP_STATUS_BAD_REQUEST).json({
+          error: `"${serialnumber}" is in the database. 
+          Change "${existingVideo.serialnumber}" in the form`,
+        });
       } else {
         console.info("Serial Number is valid:", serialnumber);
       }
@@ -125,11 +130,9 @@ export default async function handler(request, response) {
           "Validation error: Please provide a valid department or location input"
         );
 
-        return response
-          .status(HTTP_STATUS_BAD_REQUEST)
-          .json({
-            error: "Please provide a valid department or location input",
-          });
+        return response.status(HTTP_STATUS_BAD_REQUEST).json({
+          error: "Please provide a valid department or location input",
+        });
       } else {
         console.info("Department or Location is valid:", departmentlocation);
       }
@@ -149,6 +152,6 @@ export default async function handler(request, response) {
     console.error("Error in handler:", error);
     return response
       .status(HTTP_STATUS_INTERNAL_SERVER_ERROR)
-      .json({ message: "Internal Server Error" });
+      .json({ message: "Internal Server Error: " + error });
   }
 }
