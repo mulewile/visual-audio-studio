@@ -28,14 +28,16 @@ export const backgroundStyle = {
 };
 
 const videoViewHeader = "Video Equipment";
-export default function VideoEquipment() {
+export default function VideoEquipment({ setFormStatus }) {
   return (
     <div style={backgroundStyle}>
       <StyledHeader>{videoViewHeader}</StyledHeader>
 
       <StyledLink href={"/"}>{linkText}</StyledLink>
       <Link href={`/add`}>
-        <StyledButton disabled={true}>Add</StyledButton>
+        <StyledButton disabled={true} onClick={setFormStatus()}>
+          Add
+        </StyledButton>
       </Link>
       <VideoEquipmentStyledTable />
     </div>
