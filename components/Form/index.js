@@ -38,6 +38,11 @@ export const StyledForm = styled.form`
     }
   }
 
+  legend {
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+
   fieldset {
     padding: 15px;
     border-radius: 10px;

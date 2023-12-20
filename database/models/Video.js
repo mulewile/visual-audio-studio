@@ -6,7 +6,7 @@ const videoSchema = new Schema({
   name: { type: String, required: true },
   type: { type: String, required: true },
   model: { type: String, required: true },
-  serialnumber: { type: String, required: true },
+  serialnumber: { type: String, required: true, unique: true },
   purchasedate: { type: String, required: true },
   condition: { type: String, required: true },
   color: { type: String, required: true },
