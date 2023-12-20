@@ -24,6 +24,7 @@ export default function VideoFormDetails() {
             name="name"
             aria-label="Name"
             placeholder="Enter video equipment name"
+            autoFocus
           />
           <label htmlFor="videoTypeInput">Type</label>
           <input

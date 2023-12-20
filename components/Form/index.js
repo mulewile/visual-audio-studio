@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { useEffect, useRef } from "react";
 
 export const StyledFormContainer = styled.div`
   margin-top: 3rem;
@@ -51,5 +52,17 @@ export const FormTitle = styled.h2`
 `;
 
 export default function Form({ onSubmit, children }) {
-  return <StyledForm onSubmit={onSubmit}>{children}</StyledForm>;
+  const formRef = useRef(null);
+
+  useEffect(() => {
+    if (formRef.current) {
+      formRef.current.focus();
+    }
+  }, []);
+
+  return (
+    <StyledForm ref={formRef} onSubmit={onSubmit}>
+      {children}
+    </StyledForm>
+  );
 }

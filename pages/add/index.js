@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import { useRouter } from "next/router";
+import { v4 as uuidv4 } from "uuid";
 import Button from "@/components/Button";
-import Form, { FormTitle } from "@/components/Form";
+import Form from "@/components/Form";
 import { StyledFormContainer } from "@/components/Form";
 import myEditImage from "../../resources/edit.png";
 import { StyledLink } from "../video/[id]";
-import { useRouter } from "next/router";
-import { v4 as uuidv4 } from "uuid";
 import StyledErrorMessage from "@/components/ErrorMessage";
-import { styled } from "styled-components";
 import VideoFormDetails from "@/components/FormComponents/videoForm";
 
 export const backgroundStyle = {
@@ -23,7 +22,9 @@ export const backgroundStyle = {
   alignItems: "center",
 };
 
-export default function Add({ videoForm }) {
+export default function Add({ videoForm, ref }) {
+  const videoFormValue = useRef(videoForm);
+
   const [errorMessage, setErrorMessage] = useState(null);
   const router = useRouter();
   const linkText = "Cancel";
@@ -71,20 +72,22 @@ export default function Add({ videoForm }) {
 
     const formData = new FormData(event.target);
     const videoObject = Object.fromEntries(formData);
-    console.log("videoObject", videoObject);
 
     addVideoToAPI(videoObject);
-    console.log("videoData", videoObject);
   }
 
   return (
     <div style={backgroundStyle}>
       <StyledFormContainer>
-        <Form onSubmit={handleSubmit} className="video_equipment-form">
+        <Form
+          onSubmit={handleSubmit}
+          className="video_equipment-form"
+          ref={ref}
+        >
           {errorMessage && (
             <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
           )}
-          {videoForm ? (
+          {videoFormValue ? (
             <VideoFormDetails />
           ) : (
             <h2>
@@ -92,7 +95,7 @@ export default function Add({ videoForm }) {
               department
             </h2>
           )}
-          <Button type="submit" disabled={!videoForm}>
+          <Button type="submit" disabled={!videoFormValue}>
             Submit
           </Button>
           <StyledLink href={"/videoEquip"}>{linkText}</StyledLink>
