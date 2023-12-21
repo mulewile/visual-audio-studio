@@ -8,6 +8,7 @@ import myEditImage from "../../resources/edit.png";
 import { StyledLink } from "../video/[id]";
 import StyledErrorMessage from "@/components/ErrorMessage";
 import VideoFormDetails from "@/components/FormComponents/videoForm";
+import AudioFormDetails from "@/components/FormComponents/audioForm";
 
 export const backgroundStyle = {
   backgroundImage: `url(${myEditImage.src})`,
@@ -22,12 +23,14 @@ export const backgroundStyle = {
   alignItems: "center",
 };
 
-export default function Add({ videoForm, ref }) {
+export default function Add({ videoForm, ref, audioForm }) {
   const videoFormValue = useRef(videoForm);
+  const audioFormValue = useRef(audioForm);
 
   const [errorMessage, setErrorMessage] = useState(null);
   const router = useRouter();
   const linkText = "Cancel";
+  const PATH = videoForm ? "/videoEquip" : audioForm ? "/audioEquip" : "/";
 
   async function postVideoToAPI(videoData) {
     try {
@@ -87,18 +90,15 @@ export default function Add({ videoForm, ref }) {
           {errorMessage && (
             <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
           )}
-          {videoFormValue ? (
+          {videoForm ? (
             <VideoFormDetails />
-          ) : (
-            <h2>
-              No Form Available. Contact the system administrator or the IT
-              department
-            </h2>
-          )}
-          <Button type="submit" disabled={!videoFormValue}>
+          ) : audioForm ? (
+            <AudioFormDetails />
+          ) : null}
+          <Button type="submit" disabled={!videoFormValue || !audioFormValue}>
             Submit
           </Button>
-          <StyledLink href={"/videoEquip"}>{linkText}</StyledLink>
+          <StyledLink href={PATH}>{linkText}</StyledLink>
         </Form>
       </StyledFormContainer>
     </div>
