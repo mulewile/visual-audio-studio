@@ -1,7 +1,7 @@
 import StyledHeader from "@/components/Header";
 import Footer from "@/components/Footer";
 import AudioEquipmentStyledTable from "@/components/AudioEquipment";
-import styled from "styled-components";
+import StyledButton from "../components/Button";
 import { v4 as uuidv4 } from "uuid";
 import useSWR from "swr";
 import { useRouter } from "next/router";
@@ -27,11 +27,16 @@ export const backgroundStyle = {
   alignItems: "center",
 };
 
-export default function AudioEquipment() {
+export default function AudioEquipment({ setFormStatusAudio }) {
   return (
     <div style={backgroundStyle}>
       <StyledHeader>{audioViewHeader}</StyledHeader>
       <StyledLink href={"/"}>{linkText}</StyledLink>
+      <Link href={`/add`}>
+        <StyledButton disabled={true} onClick={setFormStatusAudio()}>
+          Add
+        </StyledButton>
+      </Link>
       <AudioEquipmentStyledTable />
     </div>
   );

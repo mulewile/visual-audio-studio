@@ -8,9 +8,14 @@ const fetcher = (url) => fetch(url).then((response) => response.json());
 
 export default function App({ Component, pageProps }) {
   const [videoForm, setVideoForm] = useState(false);
+  const [audioForm, setAudioForm] = useState(false);
 
   function setFormStatus() {
     setVideoForm(!false);
+  }
+
+  function setFormStatusAudio() {
+    setAudioForm(!false);
   }
 
   return (
@@ -20,7 +25,9 @@ export default function App({ Component, pageProps }) {
         <Component
           {...pageProps}
           setFormStatus={setFormStatus}
+          setFormStatusAudio={setFormStatusAudio}
           videoForm={videoForm}
+          audioForm={audioForm}
         />
       </SWRConfig>
       <Footer />
