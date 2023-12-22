@@ -29,14 +29,18 @@ export default function Add({ videoForm, ref, audioForm }) {
 
   const [errorMessage, setErrorMessage] = useState(null);
   const router = useRouter();
-  const linkText = "Cancel";
+  const LINK_TEXT = "Cancel";
   const PATH = videoForm ? "/videoEquip" : audioForm ? "/audioEquip" : "/";
 
-  async function postVideoToAPI(videoData) {
+  async function postVideoToAPI(userInputData) {
+    const VIDEO_API = "/api/video";
+    const AUDIO_API = "/api/audio";
+    const API_PATH = videoForm ? VIDEO_API : audioForm ? AUDIO_API : null;
+
     try {
-      const response = await fetch("/api/video", {
+      const response = await fetch(API_PATH, {
         method: "POST",
-        body: JSON.stringify(videoData),
+        body: JSON.stringify(userInputData),
         headers: {
           "Content-Type": "application/json",
         },
@@ -44,10 +48,10 @@ export default function Add({ videoForm, ref, audioForm }) {
       const responseData = await response.json();
 
       if (response.ok) {
-        router.push("/videoEquip");
+        router.push(PATH);
         return response.ok;
       } else if (!response.ok) {
-        console.log(responseData.error);
+        console.log("response ======", responseData.error);
         setErrorMessage(responseData.error);
         return;
       }
@@ -62,11 +66,11 @@ export default function Add({ videoForm, ref, audioForm }) {
     return uuidv4();
   }
 
-  async function addVideoToAPI(videoData) {
+  async function addVideoToAPI(userInputData) {
     const id = generateUniqueId();
-    const videoWithId = { ...videoData, id };
+    const userInputDataWithId = { ...userInputData, id };
 
-    const isSuccess = await postVideoToAPI(videoWithId);
+    const isSuccess = await postVideoToAPI(userInputDataWithId);
   }
 
   function handleSubmit(event) {
@@ -74,9 +78,10 @@ export default function Add({ videoForm, ref, audioForm }) {
     event.preventDefault();
 
     const formData = new FormData(event.target);
-    const videoObject = Object.fromEntries(formData);
+    const userInputDataObject = Object.fromEntries(formData);
 
-    addVideoToAPI(videoObject);
+    addVideoToAPI(userInputDataObject);
+    console.log("Object:", userInputDataObject);
   }
 
   return (
@@ -98,7 +103,7 @@ export default function Add({ videoForm, ref, audioForm }) {
           <Button type="submit" disabled={!videoFormValue || !audioFormValue}>
             Submit
           </Button>
-          <StyledLink href={PATH}>{linkText}</StyledLink>
+          <StyledLink href={PATH}>{LINK_TEXT}</StyledLink>
         </Form>
       </StyledFormContainer>
     </div>

@@ -71,10 +71,10 @@ export default async function handler(request, response) {
           .status(HTTP_STATUS_BAD_REQUEST)
           .json({ error: "Please provide a valid serial number input" });
       }
-      if (serialnumber === existingVideo.serialnumber) {
+      if (existingVideo) {
         return response.status(HTTP_STATUS_BAD_REQUEST).json({
-          error: `"${serialnumber}" is in the database. 
-          Change "${existingVideo.serialnumber}" in the form`,
+          error: `"${existingVideo}" is in the database. 
+          Change "${existingVideo}" in the form`,
         });
       } else {
         console.info("Serial Number is valid:", serialnumber);
