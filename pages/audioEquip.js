@@ -27,13 +27,18 @@ export const backgroundStyle = {
   alignItems: "center",
 };
 
-export default function AudioEquipment({ setFormStatusAudio }) {
+export default function AudioEquipment({ toggleFormStatus }) {
   return (
     <div style={backgroundStyle}>
       <StyledHeader>{audioViewHeader}</StyledHeader>
       <StyledLink href={"/"}>{linkText}</StyledLink>
       <Link href={`/add`}>
-        <StyledButton disabled={true} onClick={setFormStatusAudio()}>
+        <StyledButton
+          disabled={false}
+          onClick={() => {
+            toggleFormStatus("audioForm");
+          }}
+        >
           Add
         </StyledButton>
       </Link>

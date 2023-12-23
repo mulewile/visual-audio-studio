@@ -1,12 +1,6 @@
 import StyledHeader from "@/components/Header";
-import Footer from "@/components/Footer";
 import CustomerDetailsStyledTable from "@/components/customerDetails";
-import styled from "styled-components";
-import { v4 as uuidv4 } from "uuid";
-import useSWR from "swr";
 import StyledButton from "../components/Button";
-import { useRouter } from "next/router";
-import Image from "next/image";
 import Link from "next/link";
 import { StyledLink } from "./customer/[id]";
 import myVideoImage from "../resources/kunde.png";
@@ -28,11 +22,21 @@ export const backgroundStyle = {
 };
 
 const customerViewHeader = "Customer Details";
-export default function customerDetails() {
+export default function CustomerDetails({ toggleFormStatus }) {
   return (
     <div style={backgroundStyle}>
       <StyledHeader>{customerViewHeader}</StyledHeader>
       <StyledLink href={"/"}>{linkText}</StyledLink>
+      <Link href={`/add`}>
+        <StyledButton
+          disabled={false}
+          onClick={() => {
+            toggleFormStatus("customerForm");
+          }}
+        >
+          Add
+        </StyledButton>
+      </Link>
       <TableContainer>
         <CustomerDetailsStyledTable />
       </TableContainer>
