@@ -9,6 +9,7 @@ import { StyledLink } from "../video/[id]";
 import StyledErrorMessage from "@/components/ErrorMessage";
 import VideoFormDetails from "@/components/FormComponents/videoForm";
 import AudioFormDetails from "@/components/FormComponents/audioForm";
+import CustomerFormDetails from "@/components/FormComponents/customerForm";
 
 export const backgroundStyle = {
   backgroundImage: `url(${myEditImage.src})`,
@@ -23,19 +24,32 @@ export const backgroundStyle = {
   alignItems: "center",
 };
 
-export default function Add({ videoForm, ref, audioForm }) {
+export default function Add({ ref, formStatus }) {
+  const videoForm = formStatus.videoForm;
+  const audioForm = formStatus.audioForm;
+  const customerForm = formStatus.customerForm;
+
   const videoFormValue = useRef(videoForm);
   const audioFormValue = useRef(audioForm);
+  const customerFormValue = useRef(customerForm);
 
   const [errorMessage, setErrorMessage] = useState(null);
   const router = useRouter();
   const LINK_TEXT = "Cancel";
-  const PATH = videoForm ? "/videoEquip" : audioForm ? "/audioEquip" : "/";
+  const PATH = videoFormValue
+    ? "/videoEquip"
+    : audioFormValue
+    ? "/audioEquip"
+    : "/";
 
   async function postVideoToAPI(userInputData) {
     const VIDEO_API = "/api/video";
     const AUDIO_API = "/api/audio";
-    const API_PATH = videoForm ? VIDEO_API : audioForm ? AUDIO_API : null;
+    const API_PATH = videoFormValue
+      ? VIDEO_API
+      : audioFormValue
+      ? AUDIO_API
+      : null;
 
     try {
       const response = await fetch(API_PATH, {
@@ -95,10 +109,12 @@ export default function Add({ videoForm, ref, audioForm }) {
           {errorMessage && (
             <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
           )}
-          {videoForm ? (
+          {videoFormValue ? (
             <VideoFormDetails />
-          ) : audioForm ? (
+          ) : audioFormValue ? (
             <AudioFormDetails />
+          ) : customerFormValue ? (
+            <CustomerFormDetails />
           ) : null}
           <Button type="submit" disabled={!videoFormValue || !audioFormValue}>
             Submit

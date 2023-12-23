@@ -7,15 +7,19 @@ import Footer from "@/components/Footer";
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
 export default function App({ Component, pageProps }) {
-  const [videoForm, setVideoForm] = useState(false);
-  const [audioForm, setAudioForm] = useState(false);
+  const [formStatus, setFormStatus] = useState({
+    videoForm: false,
+    audioForm: false,
+    customerForm: false,
+  });
 
-  function setFormStatus() {
-    setVideoForm(!false);
-  }
+  function toggleFormStatus(formName) {
+    setFormStatus((prevStatus) => ({
+      ...prevStatus,
+      [formName]: !prevStatus[formName],
+    }));
 
-  function setFormStatusAudio() {
-    setAudioForm(!false);
+    console.log("Stataus", formStatus, formName);
   }
 
   return (
@@ -24,10 +28,8 @@ export default function App({ Component, pageProps }) {
       <SWRConfig value={{ fetcher }}>
         <Component
           {...pageProps}
-          setFormStatus={setFormStatus}
-          setFormStatusAudio={setFormStatusAudio}
-          videoForm={videoForm}
-          audioForm={audioForm}
+          toggleFormStatus={toggleFormStatus}
+          formStatus={formStatus}
         />
       </SWRConfig>
       <Footer />
