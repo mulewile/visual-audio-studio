@@ -11,6 +11,13 @@ const StyledFieldsContainer = styled.div`
 `;
 
 export default function CustomerFormDetails() {
+  const STREET = "street";
+  const STATE = "state";
+  const CITY = "city";
+  const ZIP_CODE = "zip_code";
+  const NAME = "name";
+  const EMAIL = "email";
+
   return (
     <>
       <FormTitle>Customer Details Form</FormTitle>
@@ -20,7 +27,7 @@ export default function CustomerFormDetails() {
           <label htmlFor="videoNameInput">Company Name</label>
           <input
             id="customerNameInput"
-            name="customerName"
+            name="company_name"
             aria-label="customerName"
             placeholder="Enter customer name"
             autoFocus
@@ -28,7 +35,7 @@ export default function CustomerFormDetails() {
           <label htmlFor="phoneNumberInput">Phone Number</label>
           <input
             id="phoneNumberInput"
-            name="phoneNumber"
+            name="phone_number"
             aria-label="phoneNumberInput"
             placeholder="e.g., +273-076-2232-2900"
           />
@@ -52,40 +59,40 @@ export default function CustomerFormDetails() {
           <label htmlFor="streetInput">Street</label>
           <input
             id="streetInput"
-            name="street"
+            name={STREET}
             aria-label="Street"
             placeholder="Enter the street"
           />
           <label htmlFor="cityInput">City</label>
           <input
             id="cityInput"
-            name="city"
+            name={CITY}
             aria-label="City"
             placeholder="Enter the City"
           />
-          <label htmlFor="stateInput">State - Region</label>
+          <label htmlFor={"stateInput"}>State - Region</label>
           <input
             id="stateInput"
-            name="state"
+            name={STATE}
             aria-label="State"
             placeholder="Enter the State"
           />
 
-          <label htmlFor="videoAvailabilityInput">ZIP - Postal Code</label>
+          <label htmlFor={"zipCodeInput"}>ZIP - Postal Code</label>
           <input
-            id="videoAvailabilityInput"
-            name="availability"
-            aria-label="Availability"
-            placeholder="Enter the availability status"
+            id="zipCodeInput"
+            name={ZIP_CODE}
+            aria-label="ZIP or Postal Code"
+            placeholder="Enter the ZIP or Postal Code"
           />
 
           <legend>Contact Person</legend>
           <label htmlFor="nameInput">Name</label>
-          <input id="nameInput" name="name" aria-label="Contact Person Name" />
-          <label htmlFor="emailInput">Email</label>
+          <input id="nameInput" name={NAME} aria-label="Contact Person Name" />
+          <label htmlFor={EMAIL}>Email</label>
           <input
             id="emailInput"
-            name="email"
+            name={EMAIL}
             aria-label="Email"
             placeholder="e.g., rossi@mailme.tx."
           />

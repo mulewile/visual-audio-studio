@@ -11,8 +11,9 @@ const LoadingComponent = () => {
 
   return (
     <h1 style={loadingStyles}>
-      <span style={{ color: "orange" }}>Loading</span>
-      <span>...</span>
+      <span style={{ color: "orange" }}>
+        Loading<span>...</span>
+      </span>
     </h1>
   );
 };

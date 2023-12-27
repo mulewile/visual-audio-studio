@@ -77,7 +77,6 @@ export default async function handler(request, response) {
           Change "${existingVideo}" in the form`,
         });
       } else {
-        git;
         console.info("Serial Number is valid:", serialnumber);
       }
 

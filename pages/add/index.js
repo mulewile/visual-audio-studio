@@ -34,21 +34,28 @@ export default function Add({ ref, formStatus }) {
   const customerFormValue = useRef(customerForm);
 
   const [errorMessage, setErrorMessage] = useState(null);
+
   const router = useRouter();
   const LINK_TEXT = "Cancel";
-  const PATH = videoFormValue
+  const PATH = videoForm
     ? "/videoEquip"
-    : audioFormValue
+    : audioForm
     ? "/audioEquip"
+    : customerForm
+    ? "/customerList"
     : "/";
 
   async function postVideoToAPI(userInputData) {
     const VIDEO_API = "/api/video";
     const AUDIO_API = "/api/audio";
-    const API_PATH = videoFormValue
+    const CUSTOMER_API = "/api/customer";
+
+    const API_PATH = videoForm
       ? VIDEO_API
-      : audioFormValue
+      : audioForm
       ? AUDIO_API
+      : customerForm
+      ? CUSTOMER_API
       : null;
 
     try {
@@ -65,7 +72,12 @@ export default function Add({ ref, formStatus }) {
         router.push(PATH);
         return response.ok;
       } else if (!response.ok) {
-        console.log("response ======", responseData.error);
+        console.log(
+          "response ======",
+          responseData.error,
+          userInputData,
+          API_PATH
+        );
         setErrorMessage(responseData.error);
         return;
       }
@@ -109,14 +121,17 @@ export default function Add({ ref, formStatus }) {
           {errorMessage && (
             <StyledErrorMessage>{errorMessage}</StyledErrorMessage>
           )}
-          {videoFormValue ? (
+          {videoForm ? (
             <VideoFormDetails />
-          ) : audioFormValue ? (
+          ) : audioForm ? (
             <AudioFormDetails />
-          ) : customerFormValue ? (
+          ) : customerForm ? (
             <CustomerFormDetails />
           ) : null}
-          <Button type="submit" disabled={!videoFormValue || !audioFormValue}>
+          <Button
+            type="submit"
+            disabled={!videoFormValue || !audioFormValue || !customerFormValue}
+          >
             Submit
           </Button>
           <StyledLink href={PATH}>{LINK_TEXT}</StyledLink>
