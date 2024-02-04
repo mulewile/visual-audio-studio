@@ -17,11 +17,26 @@ export default async function handler(request, response) {
 
     if (request.method === "GET") {
       const customer = await Customer.find();
-      console.log("Hello Get");
+      console.log("Hello Get", customer);
 
       return response.status(HTTP_STATUS_OK).json(customer);
     } else if (request.method === "POST") {
       const customerData = request.body;
+      console.log("Customer Rating", customerData);
+
+      if (
+        customerData.rating !== undefined &&
+        Object.keys(customerData).length === 1
+      ) {
+        console.log("Handling rating-only post");
+
+        const customerRating = await Customer.create({
+          rating: customerData.rating,
+        });
+        console.log("Customer Rating", customerRating);
+
+        return response.status(HTTP_STATUS_CREATED).json(customerRating);
+      }
 
       const {
         company_name,

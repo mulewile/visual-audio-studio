@@ -2,6 +2,7 @@ import styled from "styled-components";
 import useSWR from "swr";
 import StyledButton from "../Button";
 import Link from "next/link";
+import Rating from "react-rating";
 
 export const TableContainer = styled.div`
   overflow: auto;
@@ -56,6 +57,22 @@ const ErrorMessage = styled.h1`
 export default function CustomerDetailsStyledTable() {
   const { data, error } = useSWR("/api/customer");
 
+  const insetCustomerRating = async (value) => {
+    try {
+      const response = await fetch("/api/customer", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ rating: value }),
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error while posting customer rating:", error);
+    }
+  };
+
   if (error) {
     return (
       <ErrorContainer>
@@ -75,6 +92,7 @@ export default function CustomerDetailsStyledTable() {
         <StyledTableRow>
           <StyledTableHeaderCell>Name</StyledTableHeaderCell>
           <StyledTableHeaderCell>Address</StyledTableHeaderCell>
+          <StyledTableHeaderCell>Customer Rating</StyledTableHeaderCell>
           <StyledTableHeaderCell>Details</StyledTableHeaderCell>
           <StyledTableHeaderCell>Manage</StyledTableHeaderCell>
         </StyledTableRow>
@@ -84,6 +102,16 @@ export default function CustomerDetailsStyledTable() {
           <StyledTableRow key={item._id}>
             <StyledTableCell>{item.company_name}</StyledTableCell>
             <StyledTableCell>{`${item.address.street}, ${item.address.city}, ${item.address.state} ${item.address.zip_code}`}</StyledTableCell>
+            <StyledTableCell>
+              <Rating
+                onClick={(value) => insetCustomerRating(value)}
+                initialRating={2}
+                fractions={2}
+                quiet={false}
+                fullSymbol={<span>&#11088;</span>}
+                placeholderSymbol={<span>&#9734;</span>}
+              />
+            </StyledTableCell>
             <StyledTableCell>
               <Link href={`/customer/${item._id}`}>
                 <StyledButton>SHOW</StyledButton>

@@ -3,15 +3,15 @@ import mongoose from "mongoose";
 const { Schema } = mongoose;
 
 const customersSchema = new Schema({
-  company_name: { type: String, required: true },
-  phone_number: { type: String, required: true },
-  industry: { type: String, required: true },
-  specialization: { type: String, required: true },
+  company_name: { type: String, required: false },
+  phone_number: { type: String, required: false },
+  industry: { type: String, required: false },
+  specialization: { type: String, required: false },
   address: {
-    street: { type: String, required: true },
-    city: { type: String, required: true },
-    state: { type: String, required: true },
-    zip_code: { type: String, required: true },
+    street: { type: String, required: false },
+    city: { type: String, required: false },
+    state: { type: String, required: false },
+    zip_code: { type: String, required: false },
   },
   contact_person: {
     name: { type: String, required: false },
