@@ -15,6 +15,9 @@ export default async function handler(request, response) {
           .json({ status: "error", message: "Customer details not found" });
       }
       return response.status(200).json(customerDetails);
+    } else if (request.method === "PUT") {
+      console.log("Hello Patch", request.body);
+      return response.status(200).json(customerDetails);
     } else {
       return response.status(405).json({
         status: "error",

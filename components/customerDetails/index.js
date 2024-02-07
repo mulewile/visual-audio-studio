@@ -57,17 +57,18 @@ const ErrorMessage = styled.h1`
 export default function CustomerDetailsStyledTable() {
   const { data, error } = useSWR("/api/customer");
 
-  const insetCustomerRating = async (value) => {
+  const insetCustomerRating = async (value, item_id) => {
+    console.log("Rating value:", value, "Item ID:", item_id);
     try {
       const response = await fetch("/api/customer", {
-        method: "POST",
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ rating: value }),
+        body: JSON.stringify({ rating: value, id: item_id }),
       });
       const data = await response.json();
-      console.log(data);
+      console.log("Data from posting customer rating:", data);
     } catch (error) {
       console.error("Error while posting customer rating:", error);
     }
@@ -104,7 +105,7 @@ export default function CustomerDetailsStyledTable() {
             <StyledTableCell>{`${item.address.street}, ${item.address.city}, ${item.address.state} ${item.address.zip_code}`}</StyledTableCell>
             <StyledTableCell>
               <Rating
-                onClick={(value) => insetCustomerRating(value)}
+                onClick={(value) => insetCustomerRating(value, item._id)}
                 initialRating={2}
                 fractions={2}
                 quiet={false}

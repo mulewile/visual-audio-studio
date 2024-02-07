@@ -18,8 +18,6 @@ export default function App({ Component, pageProps }) {
       ...prevStatus,
       [formName]: !prevStatus[formName],
     }));
-
-    console.log("Stataus", formStatus, formName);
   }
 
   return (

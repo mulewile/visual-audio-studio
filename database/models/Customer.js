@@ -7,6 +7,7 @@ const customersSchema = new Schema({
   phone_number: { type: String, required: false },
   industry: { type: String, required: false },
   specialization: { type: String, required: false },
+  rating: { type: Number, required: false },
   address: {
     street: { type: String, required: false },
     city: { type: String, required: false },
