@@ -14,7 +14,7 @@ export default async function handler(request, response) {
           .status(404)
           .json({ status: "error", message: "Video equipment not found" });
       }
-      console.log("response", `"Video with id ${id} found."`);
+
       return response.status(200).json(videoEquipment, {
         status: "success",
         message: `"Video with id ${id} found."`,

@@ -72,12 +72,6 @@ export default function Add({ ref, formStatus }) {
         router.push(PATH);
         return response.ok;
       } else if (!response.ok) {
-        console.log(
-          "response ======",
-          responseData.error,
-          userInputData,
-          API_PATH
-        );
         setErrorMessage(responseData.error);
         return;
       }
@@ -100,14 +94,12 @@ export default function Add({ ref, formStatus }) {
   }
 
   function handleSubmit(event) {
-    console.log("Event:", event);
     event.preventDefault();
 
     const formData = new FormData(event.target);
     const userInputDataObject = Object.fromEntries(formData);
 
     addVideoToAPI(userInputDataObject);
-    console.log("Object:", userInputDataObject);
   }
 
   return (

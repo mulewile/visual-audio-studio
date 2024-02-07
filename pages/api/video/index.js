@@ -17,7 +17,6 @@ export default async function handler(request, response) {
 
     if (request.method === "GET") {
       const videos = await Video.find();
-      console.log("Hello Get");
 
       return response.status(HTTP_STATUS_OK).json(videos);
     } else if (request.method === "POST") {
@@ -137,7 +136,6 @@ export default async function handler(request, response) {
         console.info("Department or Location is valid:", departmentlocation);
       }
 
-      console.log("Hello", videoData);
       const video = await Video.create(videoData);
 
       response

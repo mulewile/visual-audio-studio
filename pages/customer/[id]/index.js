@@ -66,7 +66,7 @@ export default function Details() {
     );
   }
   const HEADERTEXT = `${customer.company_name} Details`;
-  console.log("Customer details and id are ====", customer);
+
   return (
     <>
       <div style={backgroundStyle}>

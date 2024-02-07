@@ -10,33 +10,19 @@ export default async function handler(request, response) {
 
   const RESPONSE_CUSTOMER_CREATED = { status: "customer created" };
 
-  const allowedMethods = ["GET", "POST"];
+  const allowedMethods = ["GET", "POST", "PATCH", "PUT", "DELETE"];
 
   try {
     await dbConnect();
 
     if (request.method === "GET") {
       const customer = await Customer.find();
-      console.log("Hello Get", customer);
 
       return response.status(HTTP_STATUS_OK).json(customer);
+    } else if (request.method === "PUT") {
+      console.log("Hello Patch", request.body);
     } else if (request.method === "POST") {
       const customerData = request.body;
-      console.log("Customer Rating", customerData);
-
-      if (
-        customerData.rating !== undefined &&
-        Object.keys(customerData).length === 1
-      ) {
-        console.log("Handling rating-only post");
-
-        const customerRating = await Customer.create({
-          rating: customerData.rating,
-        });
-        console.log("Customer Rating", customerRating);
-
-        return response.status(HTTP_STATUS_CREATED).json(customerRating);
-      }
 
       const {
         company_name,
@@ -55,7 +41,7 @@ export default async function handler(request, response) {
         address: { street, city, state, zip_code },
         contact_person: { name, email },
       };
-      console.log("data is ====", customerData);
+
       const existingPhoneNumber = await Customer.findOne({ phone_number });
       if (company_name === "") {
         console.error("Validation error: Please provide a valid company name");
@@ -131,7 +117,7 @@ export default async function handler(request, response) {
       }
 
       const customer = await Customer.create(newCustomerData);
-      console.log("Customer", customer);
+
       response
         .status(HTTP_STATUS_CREATED)
         .json(RESPONSE_CUSTOMER_CREATED, customer, {

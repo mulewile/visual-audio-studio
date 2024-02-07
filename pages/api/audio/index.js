@@ -17,7 +17,6 @@ export default async function handler(request, response) {
 
     if (request.method === "GET") {
       const audio = await Audio.find();
-      console.log("Hello Get");
 
       return response.status(HTTP_STATUS_OK).json(audio);
     } else if (request.method === "POST") {
@@ -136,7 +135,6 @@ export default async function handler(request, response) {
         console.info("Department or Location is valid:", departmentlocation);
       }
 
-      console.log("Hello", audioData);
       const audio = await Audio.create(audioData);
 
       response
