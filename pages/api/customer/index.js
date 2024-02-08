@@ -19,8 +19,6 @@ export default async function handler(request, response) {
       const customer = await Customer.find();
 
       return response.status(HTTP_STATUS_OK).json(customer);
-    } else if (request.method === "PUT") {
-      console.log("Hello Patch", request.body);
     } else if (request.method === "POST") {
       const customerData = request.body;
 

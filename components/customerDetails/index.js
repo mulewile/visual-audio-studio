@@ -4,6 +4,9 @@ import StyledButton from "../Button";
 import Link from "next/link";
 import Rating from "react-rating";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 export const TableContainer = styled.div`
   overflow: auto;
   height: 65vh;
@@ -56,21 +59,32 @@ const ErrorMessage = styled.h1`
 
 export default function CustomerDetailsStyledTable() {
   const { data, error } = useSWR("/api/customer");
-
+  const notify = () => toast("Wow so easy!");
+  const success = () => toast("Rating successfully updated");
+  const errorToast = () => toast("Failed to update rating");
   const insetCustomerRating = async (value, item_id) => {
     console.log("Rating value:", value, "Item ID:", item_id);
     try {
-      const response = await fetch("/api/customer", {
+      const response = await fetch(`api/customer/${item_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ rating: value, id: item_id }),
+        body: JSON.stringify({ rating: value }),
       });
+
       const data = await response.json();
       console.log("Data from posting customer rating:", data);
+
+      if (response.ok) {
+        success();
+        return;
+      } else {
+        errorToast();
+      }
     } catch (error) {
       console.error("Error while posting customer rating:", error);
+      toast.error("Error updating rating");
     }
   };
 
@@ -89,13 +103,26 @@ export default function CustomerDetailsStyledTable() {
   }
   return (
     <StyledTable>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
       <StyledTableHeader>
         <StyledTableRow>
           <StyledTableHeaderCell>Name</StyledTableHeaderCell>
           <StyledTableHeaderCell>Address</StyledTableHeaderCell>
-          <StyledTableHeaderCell>Customer Rating</StyledTableHeaderCell>
+          <StyledTableHeaderCell>Our Favourites</StyledTableHeaderCell>
           <StyledTableHeaderCell>Details</StyledTableHeaderCell>
           <StyledTableHeaderCell>Manage</StyledTableHeaderCell>
+          <StyledTableHeaderCell></StyledTableHeaderCell>
         </StyledTableRow>
       </StyledTableHeader>
       <tbody>
@@ -106,11 +133,9 @@ export default function CustomerDetailsStyledTable() {
             <StyledTableCell>
               <Rating
                 onClick={(value) => insetCustomerRating(value, item._id)}
-                initialRating={2}
+                initialRating={item.rating}
                 fractions={2}
                 quiet={false}
-                fullSymbol={<span>&#11088;</span>}
-                placeholderSymbol={<span>&#9734;</span>}
               />
             </StyledTableCell>
             <StyledTableCell>
@@ -120,6 +145,9 @@ export default function CustomerDetailsStyledTable() {
             </StyledTableCell>
             <StyledTableCell>
               <StyledButton disabled={true}>EDIT</StyledButton>
+            </StyledTableCell>
+            <StyledTableCell>
+              <StyledButton onClick={notify}>DELETE</StyledButton>
             </StyledTableCell>
           </StyledTableRow>
         ))}

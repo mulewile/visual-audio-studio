@@ -16,8 +16,12 @@ export default async function handler(request, response) {
       }
       return response.status(200).json(customerDetails);
     } else if (request.method === "PUT") {
-      console.log("Hello Patch", request.body);
-      return response.status(200).json(customerDetails);
+      await Customers.findByIdAndUpdate(id, { $set: request.body });
+
+      response.status(200).json({
+        status: `Customer with ${id} has been updated`,
+        message: "Rating updated successfully",
+      });
     } else {
       return response.status(405).json({
         status: "error",
