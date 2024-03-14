@@ -57,11 +57,13 @@ const ErrorMessage = styled.h1`
   color: red;
 `;
 
-export default function CustomerDetailsStyledTable() {
+export default function CustomerDetailsStyledTable({ toggleFormStatus }) {
   const { data, error } = useSWR("/api/customer");
-  const notify = () => toast("Wow so easy!");
-  const success = () => toast("Rating successfully updated");
-  const errorToast = () => toast("Failed to update rating");
+
+  const success = () => toast.success("Rating successfully updated");
+  const errorToast = () => toast.error("Failed to update rating");
+  const catchError = () => toast.error("Error updating rating. Contact admin.");
+
   const insetCustomerRating = async (value, item_id) => {
     console.log("Rating value:", value, "Item ID:", item_id);
     try {
@@ -84,7 +86,7 @@ export default function CustomerDetailsStyledTable() {
       }
     } catch (error) {
       console.error("Error while posting customer rating:", error);
-      toast.error("Error updating rating");
+      catchError();
     }
   };
 
@@ -113,7 +115,6 @@ export default function CustomerDetailsStyledTable() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="light"
       />
       <StyledTableHeader>
         <StyledTableRow>
@@ -144,10 +145,19 @@ export default function CustomerDetailsStyledTable() {
               </Link>
             </StyledTableCell>
             <StyledTableCell>
-              <StyledButton disabled={true}>EDIT</StyledButton>
+              <Link href={"/edit"}>
+                <StyledButton
+                  disabled={false}
+                  onClick={() => {
+                    toggleFormStatus("customerForm");
+                  }}
+                >
+                  EDIT
+                </StyledButton>
+              </Link>
             </StyledTableCell>
             <StyledTableCell>
-              <StyledButton onClick={notify}>DELETE</StyledButton>
+              <StyledButton disabled={true}>DELETE</StyledButton>
             </StyledTableCell>
           </StyledTableRow>
         ))}

@@ -60,9 +60,20 @@ export default async function handler(request, response) {
         return response.status(HTTP_STATUS_BAD_REQUEST).json({
           error: `"${phone_number}" is in the database. Change "${existingPhoneNumber}" in the form`,
         });
-      } else {
-        console.info("Phone Number is valid:", phone_number);
+      } else if (phone_number === "") {
+        console.error("Validation error: Please provide a phone number");
+
+        return response
+          .status(HTTP_STATUS_BAD_REQUEST)
+          .json({ error: "Please provide a valid phone number" });
+      } else if (phone_number.length < 10) {
+        console.error("Validation error: Please provide a valid phone number");
+
+        return response
+          .status(HTTP_STATUS_BAD_REQUEST)
+          .json({ error: "Please provide a valid phone number" });
       }
+
       if (city === "") {
         console.error("Validation error: Please provide a city");
 
@@ -104,11 +115,19 @@ export default async function handler(request, response) {
       } else {
         console.info("Name is valid:", name);
       }
+
+      const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
       if (email === "") {
         console.error("Validation error: Please provide an Email input");
 
         return response.status(HTTP_STATUS_BAD_REQUEST).json({
           error: "Please provide a valid Email",
+        });
+      } else if (!EMAIL_REGEX.test(email)) {
+        console.error("Validation error: Please provide a valid Email input");
+
+        return response.status(HTTP_STATUS_BAD_REQUEST).json({
+          error: "Please provide a valid Email. Email ",
         });
       } else {
         console.info("Email is valid:", email);
