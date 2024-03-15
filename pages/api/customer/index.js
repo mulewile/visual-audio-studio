@@ -12,6 +12,38 @@ export default async function handler(request, response) {
 
   const allowedMethods = ["GET", "POST", "PATCH", "PUT", "DELETE"];
 
+  const validateInputs = (value, errorMessage) => {
+    if (!value) {
+      console.error(errorMessage);
+      response.status(HTTP_STATUS_BAD_REQUEST).json({ error: errorMessage });
+      return false;
+    }
+    return true;
+  };
+
+  const checkDuplicatePhoneNumber = (duplicatePhoneNumber) => {
+    if (duplicatePhoneNumber) {
+      response.status(HTTP_STATUS_BAD_REQUEST).json({
+        error: `"${duplicatePhoneNumber}" is in the database. Please enter a unique Phone number`,
+      });
+      return true;
+    } else {
+      return false;
+    }
+  };
+
+  const validateEmail = (email) => {
+    const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    if (!EMAIL_REGEX.test(email)) {
+      console.error("Validation error: Please provide a valid Email input");
+      response
+        .status(HTTP_STATUS_BAD_REQUEST)
+        .json({ error: "Please provide a valid Email" });
+      return false;
+    }
+    return true;
+  };
+
   try {
     await dbConnect();
 
@@ -40,97 +72,27 @@ export default async function handler(request, response) {
         contact_person: { name, email },
       };
 
-      const existingPhoneNumber = await Customer.findOne({ phone_number });
-      if (company_name === "") {
-        console.error("Validation error: Please provide a valid company name");
+      const existingPhoneNumber = await Customer.findOne(
+        { phone_number },
+        { phone_number: 1 }
+      );
+      const duplicatePhoneNumber = existingPhoneNumber
+        ? existingPhoneNumber.phone_number
+        : null;
 
-        return response
-          .status(HTTP_STATUS_BAD_REQUEST)
-          .json({ error: "Please provide a valid company name" });
-      }
-
-      if (street === "") {
-        console.error("Validation error: Please provide a street");
-
-        return response
-          .status(HTTP_STATUS_BAD_REQUEST)
-          .json({ error: "Please provide a valid street input" });
-      }
-      if (existingPhoneNumber) {
-        return response.status(HTTP_STATUS_BAD_REQUEST).json({
-          error: `"${phone_number}" is in the database. Change "${existingPhoneNumber}" in the form`,
-        });
-      } else if (phone_number === "") {
-        console.error("Validation error: Please provide a phone number");
-
-        return response
-          .status(HTTP_STATUS_BAD_REQUEST)
-          .json({ error: "Please provide a valid phone number" });
-      } else if (phone_number.length < 10) {
-        console.error("Validation error: Please provide a valid phone number");
-
-        return response
-          .status(HTTP_STATUS_BAD_REQUEST)
-          .json({ error: "Please provide a valid phone number" });
-      }
-
-      if (city === "") {
-        console.error("Validation error: Please provide a city");
-
-        return response
-          .status(HTTP_STATUS_BAD_REQUEST)
-          .json({ error: "Please provide a city input" });
-      } else {
-        console.info("City is valid:", city);
-      }
-
-      if (state === "") {
-        console.error("Validation error: Please provide a state");
-
-        return response
-          .status(HTTP_STATUS_BAD_REQUEST)
-          .json({ error: "Please provide a state input" });
-      } else {
-        console.info("State is valid:", state);
-      }
-
-      if (zip_code === "") {
-        console.error(
-          "Validation error: Please provide a valid zip code input"
-        );
-
-        return response
-          .status(HTTP_STATUS_BAD_REQUEST)
-          .json({ error: "Please provide a valid zip code input" });
-      } else {
-        console.info("Zip code is valid:", zip_code);
-      }
-
-      if (name === "") {
-        console.error("Validation error: Please provide a name input");
-
-        return response.status(HTTP_STATUS_BAD_REQUEST).json({
-          error: "Please provide a valid name",
-        });
-      } else {
-        console.info("Name is valid:", name);
-      }
-
-      const EMAIL_REGEX = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
-      if (email === "") {
-        console.error("Validation error: Please provide an Email input");
-
-        return response.status(HTTP_STATUS_BAD_REQUEST).json({
-          error: "Please provide a valid Email",
-        });
-      } else if (!EMAIL_REGEX.test(email)) {
-        console.error("Validation error: Please provide a valid Email input");
-
-        return response.status(HTTP_STATUS_BAD_REQUEST).json({
-          error: "Please provide a valid Email. Email ",
-        });
-      } else {
-        console.info("Email is valid:", email);
+      if (
+        !validateInputs(company_name, "Please provide a valid company name") ||
+        checkDuplicatePhoneNumber(duplicatePhoneNumber) ||
+        !validateInputs(phone_number, "Please provide a phone number") ||
+        !validateInputs(street, "Please provide a street") ||
+        phone_number.length < 10 ||
+        !validateInputs(city, "Please provide a city") ||
+        !validateInputs(state, "Please provide a state") ||
+        !validateInputs(zip_code, "Please provide a valid zip code") ||
+        !validateInputs(name, "Please provide a contact name") ||
+        !validateEmail(email)
+      ) {
+        return;
       }
 
       const customer = await Customer.create(newCustomerData);
