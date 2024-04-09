@@ -13,6 +13,13 @@ export default function App({ Component, pageProps }) {
     customerForm: false,
   });
 
+  const [isEdit, setIsEdit] = useState(false);
+
+  function setEditMode() {
+    setIsEdit((isEdit) => !isEdit);
+    console.log("isEdit", isEdit);
+  }
+
   function toggleFormStatus(formName) {
     setFormStatus((prevStatus) => ({
       ...prevStatus,
@@ -28,6 +35,7 @@ export default function App({ Component, pageProps }) {
           {...pageProps}
           toggleFormStatus={toggleFormStatus}
           formStatus={formStatus}
+          setEditMode={setEditMode}
         />
       </SWRConfig>
       <Footer />

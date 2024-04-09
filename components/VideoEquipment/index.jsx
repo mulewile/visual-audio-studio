@@ -57,7 +57,7 @@ const ErrorMessage = styled.h1`
 `;
 
 
-export default function VideoEquipmentStyledTable() {
+export default function VideoEquipmentStyledTable({setIsEdit}) {
   
 
   const { data, error } = useSWR("/api/video" );
@@ -107,7 +107,7 @@ export default function VideoEquipmentStyledTable() {
             <StyledTableCell>{item.availability}</StyledTableCell>
             <StyledTableCell>{item.departmentlocation}</StyledTableCell>
             <StyledTableCell><Link href={`/video/${item._id}`}><StyledButton >SHOW</StyledButton></Link></StyledTableCell>
-            <StyledTableCell><Link href={`/edit`}><StyledButton disabled={true} >EDIT</StyledButton></Link></StyledTableCell>
+            <StyledTableCell><Link href={`/edit/${item._id}`}><StyledButton disabled={false}  >EDIT</StyledButton></Link></StyledTableCell>
           </StyledTableRow>
         ))}
       </tbody>
