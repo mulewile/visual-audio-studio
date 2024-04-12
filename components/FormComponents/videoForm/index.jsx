@@ -13,28 +13,26 @@ const StyledFieldsContainer = styled.div`
 `;
 
 export default function VideoFormDetails({isEdit}) {
+  const router = useRouter();
+  const { id } = router.query;
+  const { data: video, error } = useSWR(isEdit && id ? `/api/video/${id}` : null);
 
-  if(isEdit) {
-    const router = useRouter();
-    const { id } = router.query;
-    const { data: video, error } = useSWR(id ? `/api/video/${id}` : null);
-    if (error) {
-      return (
-        <div>
-          <p>Error loading data: Administrator will connect to the database soon</p>
-        </div>
-      );
-    }
-    if (!video) { 
-      return (
-        <div>
-          <h1>Loading...</h1>
-        </div>
-      );
-    } 
-    console.log(video);
-    console.log(id);
+  if (error) {
+    return (
+      <div>
+        <p>Error loading data: Administrator will connect to the database soon</p>
+      </div>
+    );
   }
+
+  if (!video) {
+    return (
+      <div>
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
+
 
   return (
     <>
