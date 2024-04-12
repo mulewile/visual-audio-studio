@@ -1,8 +1,9 @@
+import React, { useState, useEffect } from "react";
 import { SWRConfig } from "swr";
-import { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import GlobalStyle from "../styles";
 import Footer from "@/components/Footer";
+import GlobalStyle from "../styles";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
@@ -11,6 +12,7 @@ export default function App({ Component, pageProps }) {
     videoForm: false,
     audioForm: false,
     customerForm: false,
+    isVideoEdit: false,
   });
 
   function toggleFormStatus(formName) {
@@ -30,6 +32,7 @@ export default function App({ Component, pageProps }) {
           formStatus={formStatus}
         />
       </SWRConfig>
+
       <Footer />
     </>
   );
