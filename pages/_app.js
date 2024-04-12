@@ -1,8 +1,9 @@
+import React, { useState, useEffect } from "react";
 import { SWRConfig } from "swr";
-import { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import GlobalStyle from "../styles";
 import Footer from "@/components/Footer";
+import GlobalStyle from "../styles";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const fetcher = (url) => fetch(url).then((response) => response.json());
 
@@ -11,14 +12,8 @@ export default function App({ Component, pageProps }) {
     videoForm: false,
     audioForm: false,
     customerForm: false,
+    isVideoEdit: false,
   });
-
-  const [isEdit, setIsEdit] = useState(false);
-
-  function setEditMode() {
-    setIsEdit((isEdit) => !isEdit);
-    console.log("isEdit", isEdit);
-  }
 
   function toggleFormStatus(formName) {
     setFormStatus((prevStatus) => ({
@@ -35,9 +30,9 @@ export default function App({ Component, pageProps }) {
           {...pageProps}
           toggleFormStatus={toggleFormStatus}
           formStatus={formStatus}
-          setEditMode={setEditMode}
         />
       </SWRConfig>
+
       <Footer />
     </>
   );

@@ -10,6 +10,7 @@ import StyledErrorMessage from "@/components/ErrorMessage";
 import VideoFormDetails from "@/components/FormComponents/videoForm";
 import AudioFormDetails from "@/components/FormComponents/audioForm";
 import CustomerFormDetails from "@/components/FormComponents/customerForm";
+import useStore from "@/store/formStore";
 
 export const backgroundStyle = {
   backgroundImage: `url(${myEditImage.src})`,
@@ -25,7 +26,7 @@ export const backgroundStyle = {
 };
 
 export default function Add({ ref, formStatus }) {
-  const videoForm = formStatus.videoForm;
+  const videoForm = useStore((state) => state.isVideoFormCreate);
   const audioForm = formStatus.audioForm;
   const customerForm = formStatus.customerForm;
 

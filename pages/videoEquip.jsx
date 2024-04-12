@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { StyledLink } from "./video/[id]";
 import myVideoImage from "../resources/video_camera_one.png";
+import useStore from "@/store/formStore";
 
 const linkText = "MENU VIEW";
 
@@ -28,23 +29,31 @@ export const backgroundStyle = {
 };
 
 const videoViewHeader = "Video Equipment";
-export default function VideoEquipment({ toggleFormStatus }) {
+export default function VideoEquipment({ toggleFormStatus, formStatus }) {
+ 
+
+
+const activateVideoFormCreate = useStore((state)=>(state.activateVideoFormCreate))
+
+
+
   return (
     <div style={backgroundStyle}>
       <StyledHeader>{videoViewHeader}</StyledHeader>
 
       <StyledLink href={"/"}>{linkText}</StyledLink>
+
       <Link href={`/add`}>
         <StyledButton
           disabled={false}
           onClick={() => {
-            toggleFormStatus("videoForm");
+            activateVideoFormCreate()
           }}
         >
           Add
         </StyledButton>
       </Link>
-      <VideoEquipmentStyledTable />
+      <VideoEquipmentStyledTable toggleFormStatus={toggleFormStatus} formStatus={formStatus} />
     </div>
   );
 }
