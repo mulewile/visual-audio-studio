@@ -2,6 +2,7 @@ import { styled } from "styled-components";
 import { FormTitle } from "@/components/Form";
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import useStore from "@/store/formStore";
 
 const StyledFieldsContainer = styled.div`
   display: grid;
@@ -12,12 +13,13 @@ const StyledFieldsContainer = styled.div`
     "main_video_equipment_details-fieldset  extra_video_equipment_details-fieldset ";
 `;
 
-export default function VideoFormDetails({isEdit}) {
+export default function VideoFormDetails() {
+  const isVideoEdit = useStore((state) => state.isVideoEdit);
   const router = useRouter();
   const { id } = router.query;
-  const { data: video, error } = useSWR(isEdit && id ? `/api/video/${id}` : null);
+  const { data: video, error } = useSWR(isVideoEdit && id ? `/api/video/${id}` : null);
 
-  if (error) {
+  if (isVideoEdit && error) {
     return (
       <div>
         <p>Error loading data: Administrator will connect to the database soon</p>
@@ -25,7 +27,7 @@ export default function VideoFormDetails({isEdit}) {
     );
   }
 
-  if (!video) {
+  if (isVideoEdit && !video) {
     return (
       <div>
         <h1>Loading...</h1>

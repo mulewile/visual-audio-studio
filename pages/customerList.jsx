@@ -1,3 +1,4 @@
+import useStore from "@/store/formStore";
 import StyledHeader from "@/components/Header";
 import CustomerDetailsStyledTable from "@/components/customerDetails";
 import StyledButton from "../components/Button";
@@ -22,7 +23,9 @@ export const backgroundStyle = {
 };
 
 const customerViewHeader = "Customer Details";
-export default function CustomerDetails({ toggleFormStatus }) {
+export default function CustomerDetails() {
+
+  const activateCustomerFormCreate = useStore((state)=>(state.activateCustomerFormCreate))
   return (
     <div style={backgroundStyle}>
       <StyledHeader>{customerViewHeader}</StyledHeader>
@@ -31,7 +34,7 @@ export default function CustomerDetails({ toggleFormStatus }) {
         <StyledButton
           disabled={false}
           onClick={() => {
-            toggleFormStatus("customerForm");
+            activateCustomerFormCreate();
           }}
         >
           Add

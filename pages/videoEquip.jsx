@@ -29,7 +29,7 @@ export const backgroundStyle = {
 };
 
 const videoViewHeader = "Video Equipment";
-export default function VideoEquipment({ toggleFormStatus, formStatus }) {
+export default function VideoEquipment() {
  
 
 
@@ -43,7 +43,7 @@ const activateVideoFormCreate = useStore((state)=>(state.activateVideoFormCreate
 
       <StyledLink href={"/"}>{linkText}</StyledLink>
 
-      <Link href={`/add`}>
+      <Link href={"/add"}>
         <StyledButton
           disabled={false}
           onClick={() => {
@@ -53,7 +53,7 @@ const activateVideoFormCreate = useStore((state)=>(state.activateVideoFormCreate
           Add
         </StyledButton>
       </Link>
-      <VideoEquipmentStyledTable toggleFormStatus={toggleFormStatus} formStatus={formStatus} />
+      <VideoEquipmentStyledTable />
     </div>
   );
 }
