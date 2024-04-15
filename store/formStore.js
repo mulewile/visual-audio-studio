@@ -3,6 +3,7 @@ import { create } from "zustand";
 const useStore = create((set) => ({
   customers: 34,
   isVideoFormEdit: false,
+  videoToEditId: null,
   isAudioFormEdit: false,
   isCustomerFormEdit: false,
   isVideoFormCreate: false,
@@ -22,7 +23,8 @@ const useStore = create((set) => ({
     set((state) => ({
       isCustomerFormCreate: (state.isCustomerFormCreate = true),
     })),
-  increaseCustomers: () => set((state) => ({ customers: state.customers + 1 })),
+  setVideoToEditId: (videoId) =>
+    set((state) => ({ videoToEditId: (state.videoToEditId = videoId) })),
 }));
 
 export default useStore;

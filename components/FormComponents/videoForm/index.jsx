@@ -14,10 +14,14 @@ const StyledFieldsContainer = styled.div`
 `;
 
 export default function VideoFormDetails() {
-  const isVideoEdit = useStore((state) => state.isVideoEdit);
+  const isVideoEdit = useStore((state) => state.isVideoFormEdit);
+  const videoToEditId = useStore((state) => state.videoToEditId);
+  console.log("videoToEditId", videoToEditId);
+  console.log("isVideoEdit", isVideoEdit);
   const router = useRouter();
-  const { id } = router.query;
-  const { data: video, error } = useSWR(isVideoEdit && id ? `/api/video/${id}` : null);
+
+  const { data: video, error } = useSWR(isVideoEdit && videoToEditId ? `/api/video/${videoToEditId}` : null);
+  console.log("video", video);
 
   if (isVideoEdit && error) {
     return (
@@ -42,7 +46,6 @@ export default function VideoFormDetails() {
       <StyledFieldsContainer>
         <fieldset className="main_video_equipment_details-fieldset">
           <legend>Main Details</legend>
-
           <label htmlFor="videoNameInput"> Name</label>
           <input
             id="videoNameInput"
@@ -50,6 +53,7 @@ export default function VideoFormDetails() {
             aria-label="Name"
             placeholder="Enter video equipment name"
             autoFocus
+            defaultValue={isVideoEdit && video ? video.name : ""}
           />
           <label htmlFor="videoTypeInput">Type</label>
           <input
@@ -57,6 +61,7 @@ export default function VideoFormDetails() {
             name="type"
             aria-label="Type"
             placeholder="e.g., Documentary"
+            defaultValue={isVideoEdit && video ? video.type : ""}
           />
           <label htmlFor="videoModelInput"> Model</label>
           <input
@@ -64,6 +69,7 @@ export default function VideoFormDetails() {
             name="model"
             aria-label="Model"
             placeholder="Enter the model"
+            defaultValue={isVideoEdit && video ? video.model : ""}
           />
           <label htmlFor="videoSerialNumberInput">Serial Number</label>
           <input
@@ -71,6 +77,7 @@ export default function VideoFormDetails() {
             name="serialnumber"
             aria-label="Serial Number"
             placeholder="Enter the serial number"
+            defaultValue={isVideoEdit && video ? video.serialnumber : ""}
           />
           <label htmlFor="videoColorInput">Color</label>
           <input
@@ -78,6 +85,7 @@ export default function VideoFormDetails() {
             name="color"
             aria-label="Color"
             placeholder="Enter the color"
+            defaultValue={isVideoEdit && video ? video.color : ""}
           />
         </fieldset>
         <fieldset className="extra_video_equipment_details-fieldset">
@@ -88,6 +96,8 @@ export default function VideoFormDetails() {
             name="purchasedate"
             type="date"
             aria-label="Purchase Date"
+            placeholder="Enter the purchase date"
+            defaultValue={isVideoEdit && video ? video.purchasedate : ""}
           />
           <label htmlFor="videoConditionInput">Condition</label>
           <input
@@ -95,6 +105,7 @@ export default function VideoFormDetails() {
             name="condition"
             aria-label="Condition"
             placeholder="e.g., Good, Excellent, etc."
+            defaultValue={isVideoEdit && video ? video.condition : ""}
           />
 
           <label htmlFor="videoAvailabilityInput">Availability</label>
@@ -103,6 +114,7 @@ export default function VideoFormDetails() {
             name="availability"
             aria-label="Availability"
             placeholder="Enter the availability status"
+            defaultValue={isVideoEdit && video ? video.availability : ""}
           />
           <label htmlFor="videoDepartmentlocationInput">Location</label>
           <input
@@ -110,6 +122,7 @@ export default function VideoFormDetails() {
             name="departmentlocation"
             aria-label="Location"
             placeholder="Enter the location"
+            defaultValue={isVideoEdit && video ? video.departmentlocation : ""}
           />
         </fieldset>
       </StyledFieldsContainer>

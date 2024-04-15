@@ -61,7 +61,8 @@ const ErrorMessage = styled.h1`
 
 export default function VideoEquipmentStyledTable() {
   
-const activateVideoFormCreate = useStore((state)=>(state.activateVideoFormCreate))
+const activateVideoFormEdit = useStore((state)=>(state.activateVideoFormEdit))
+const setVideoToEditId = useStore((state)=>(state.setVideoToEditId))
   const { data, error } = useSWR("/api/video" );
  
 
@@ -110,7 +111,7 @@ const activateVideoFormCreate = useStore((state)=>(state.activateVideoFormCreate
             <StyledTableCell>{item.departmentlocation}</StyledTableCell>
             <StyledTableCell><Link href={`/video/${item._id}`}><StyledButton >SHOW</StyledButton></Link></StyledTableCell>
             <StyledTableCell><Link href={`/edit/${item._id}`}><StyledButton disabled={false} onClick={() => {
-            activateVideoFormCreate();
+            activateVideoFormEdit(), setVideoToEditId(item._id);
           }} >EDIT</StyledButton></Link></StyledTableCell>
           </StyledTableRow>
         ))}
