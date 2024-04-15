@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import useSWR from "swr"
 import { useRouter } from "next/router";
+import useStore from '@/store/formStore';
 import StyledButton from '../Button';
 import Link from 'next/link';
 import LoadingComponent from '../LoadingHeader';
@@ -58,12 +59,13 @@ const ErrorMessage = styled.h1`
 `;
 
 
-export default function VideoEquipmentStyledTable({toggleFormStatus, formStatus}) {
+export default function VideoEquipmentStyledTable() {
   
-
+const activateVideoFormEdit = useStore((state)=>(state.activateVideoFormEdit))
+const setVideoToEditId = useStore((state)=>(state.setVideoToEditId))
   const { data, error } = useSWR("/api/video" );
  
-  console.log("formStatus", formStatus);
+
   if (error) {
     return (
       <ErrorContainer>
@@ -108,8 +110,8 @@ export default function VideoEquipmentStyledTable({toggleFormStatus, formStatus}
             <StyledTableCell>{item.availability}</StyledTableCell>
             <StyledTableCell>{item.departmentlocation}</StyledTableCell>
             <StyledTableCell><Link href={`/video/${item._id}`}><StyledButton >SHOW</StyledButton></Link></StyledTableCell>
-            <StyledTableCell><Link href={`/edit/${item._id}`}><StyledButton disabled={false}           onClick={() => {
-            toggleFormStatus("isVideoEdit");
+            <StyledTableCell><Link href={`/edit/${item._id}`}><StyledButton disabled={false} onClick={() => {
+            activateVideoFormEdit(), setVideoToEditId(item._id);
           }} >EDIT</StyledButton></Link></StyledTableCell>
           </StyledTableRow>
         ))}

@@ -25,10 +25,11 @@ export const backgroundStyle = {
   alignItems: "center",
 };
 
-export default function Add({ ref, formStatus }) {
+export default function Add({ ref }) {
   const videoForm = useStore((state) => state.isVideoFormCreate);
-  const audioForm = formStatus.audioForm;
-  const customerForm = formStatus.customerForm;
+  console.log("videoForm", videoForm);
+  const audioForm = useStore((state) => state.isAudioFormCreate);
+  const customerForm = useStore((state) => state.isCustomerFormCreate);
 
   const videoFormValue = useRef(videoForm);
   const audioFormValue = useRef(audioForm);
@@ -125,7 +126,7 @@ export default function Add({ ref, formStatus }) {
             type="submit"
             disabled={!videoFormValue || !audioFormValue || !customerFormValue}
           >
-            Submit
+            Save
           </Button>
           <StyledLink href={PATH}>{LINK_TEXT}</StyledLink>
         </Form>

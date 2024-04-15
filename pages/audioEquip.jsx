@@ -1,5 +1,5 @@
 import StyledHeader from "@/components/Header";
-import Footer from "@/components/Footer";
+import useStore from "@/store/formStore";
 import AudioEquipmentStyledTable from "@/components/AudioEquipment";
 import StyledButton from "../components/Button";
 import { v4 as uuidv4 } from "uuid";
@@ -27,7 +27,10 @@ export const backgroundStyle = {
   alignItems: "center",
 };
 
-export default function AudioEquipment({ toggleFormStatus }) {
+export default function AudioEquipment() {
+
+const activateAudioFormCreate = useStore((state)=>(state.activateAudioFormCreate))
+
   return (
     <div style={backgroundStyle}>
       <StyledHeader>{audioViewHeader}</StyledHeader>
@@ -36,7 +39,7 @@ export default function AudioEquipment({ toggleFormStatus }) {
         <StyledButton
           disabled={false}
           onClick={() => {
-            toggleFormStatus("audioForm");
+            activateAudioFormCreate();
           }}
         >
           Add
