@@ -3,6 +3,7 @@ import useSWR from "swr";
 import StyledButton from "../Button";
 import Link from "next/link";
 import Rating from "react-rating";
+import useStore from "@/store/formStore";
 
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -57,15 +58,18 @@ const ErrorMessage = styled.h1`
   color: red;
 `;
 
-export default function CustomerDetailsStyledTable({ toggleFormStatus }) {
+export default function CustomerDetailsStyledTable() {
   const { data, error } = useSWR("/api/customer");
 
   const success = () => toast.success("Rating successfully updated");
   const errorToast = () => toast.error("Failed to update rating");
   const catchError = () => toast.error("Error updating rating. Contact admin.");
 
+  const activateCustomerFormEdit = useStore((state) => state.activateCustomerFormEdit);
+  const setCustomerToEditId = useStore((state) => state.setCustomerToEditId);
+
   const insetCustomerRating = async (value, item_id) => {
-    console.log("Rating value:", value, "Item ID:", item_id);
+
     try {
       const response = await fetch(`api/customer/${item_id}`, {
         method: "PUT",
@@ -145,11 +149,13 @@ export default function CustomerDetailsStyledTable({ toggleFormStatus }) {
               </Link>
             </StyledTableCell>
             <StyledTableCell>
-              <Link href={"/edit"}>
+              <Link href={`/edit/${item._id}`}>
                 <StyledButton
                   disabled={false}
                   onClick={() => {
-                    toggleFormStatus("customerForm");
+                    activateCustomerFormEdit();
+                    setCustomerToEditId(item._id);
+                    
                   }}
                 >
                   EDIT
