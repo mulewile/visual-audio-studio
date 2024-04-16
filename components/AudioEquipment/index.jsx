@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import useSWR from "swr"
+import useStore from '@/store/formStore';
 import StyledButton from '../Button';
 import Link from 'next/link';
 
@@ -52,6 +53,8 @@ const ErrorMessage = styled.h1`
 
 
 export default function AudioEquipmentStyledTable() {
+  const activateAudioFormEdit = useStore((state) => state.activateAudioFormEdit);
+  const setAudioToEditId = useStore((state) => state.setAudioToEditId);
   
 
   const { data, error } = useSWR("/api/audio" );
@@ -100,8 +103,8 @@ export default function AudioEquipmentStyledTable() {
             <StyledTableCell>{item.departmentlocation}</StyledTableCell>
             <StyledTableCell><Link href={`/audio/${item._id}`}><StyledButton >SHOW</StyledButton></Link></StyledTableCell>
             <StyledTableCell>
-            <Link href={"/edit"}>
-                <StyledButton disabled={false}>EDIT</StyledButton>
+            <Link href={`/edit/${item._id}`}>
+                <StyledButton disabled={false} onClick={()=>{activateAudioFormEdit(), setAudioToEditId(item._id) }} >EDIT</StyledButton>
               </Link>
             </StyledTableCell>
           </StyledTableRow>

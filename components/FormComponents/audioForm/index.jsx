@@ -1,5 +1,7 @@
 import { styled } from "styled-components";
 import { FormTitle } from "@/components/Form";
+import useStore from "@/store/formStore";
+import useSWR from "swr";
 
 const StyledFieldsContainer = styled.div`
   display: grid;
@@ -11,6 +13,11 @@ const StyledFieldsContainer = styled.div`
 `;
 
 export default function AudioFormDetails() {
+const audioToEditId = useStore((state) => state.audioToEditId);
+const isAudioEdit = useStore((state) => state.isAudioFormEdit);
+
+const { data: audio, error } = useSWR(isAudioEdit && audioToEditId ? `/api/audio/${audioToEditId}` : null);
+
   return (
     <>
       <FormTitle>Audio Details Form</FormTitle>
@@ -25,6 +32,7 @@ export default function AudioFormDetails() {
             aria-label="Name"
             placeholder="Enter audio equipment name"
             autoFocus
+            defaultValue={isAudioEdit && audio ? audio.name : ""}
           />
           <label htmlFor="audioTypeInput">Type</label>
           <input
@@ -32,6 +40,7 @@ export default function AudioFormDetails() {
             name="type"
             aria-label="Type"
             placeholder="e.g., Documentary"
+            defaultValue={isAudioEdit && audio ? audio.type : ""}
           />
           <label htmlFor="audioModelInput"> Model</label>
           <input
@@ -39,6 +48,7 @@ export default function AudioFormDetails() {
             name="model"
             aria-label="Model"
             placeholder="Enter the model"
+            defaultValue={isAudioEdit && audio ? audio.model : ""}
           />
           <label htmlFor="audioSerialNumberInput">Serial Number</label>
           <input
@@ -46,6 +56,7 @@ export default function AudioFormDetails() {
             name="serialnumber"
             aria-label="Serial Number"
             placeholder="Enter the serial number"
+            defaultValue={isAudioEdit && audio ? audio.serialnumber : ""}
           />
           <label htmlFor="audioColorInput">Color</label>
           <input
@@ -53,6 +64,7 @@ export default function AudioFormDetails() {
             name="color"
             aria-label="Color"
             placeholder="Enter the color"
+            defaultValue={isAudioEdit && audio ? audio.color : ""}
           />
         </fieldset>
         <fieldset className="extra_audio_equipment_details-fieldset">
@@ -63,6 +75,7 @@ export default function AudioFormDetails() {
             name="purchasedate"
             type="date"
             aria-label="Purchase Date"
+            defaultValue={isAudioEdit && audio ? audio.purchasedate : ""}
           />
           <label htmlFor="audioConditionInput">Condition</label>
           <input
@@ -70,6 +83,7 @@ export default function AudioFormDetails() {
             name="condition"
             aria-label="Condition"
             placeholder="e.g., Good, Excellent, etc."
+            defaultValue={isAudioEdit && audio ? audio.condition : ""}
           />
 
           <label htmlFor="audioAvailabilityInput">Availability</label>
@@ -78,6 +92,7 @@ export default function AudioFormDetails() {
             name="availability"
             aria-label="Availability"
             placeholder="Enter the availability status"
+            defaultValue={isAudioEdit && audio ? audio.availability : ""}
           />
           <label htmlFor="audioDepartmentlocationInput">Location</label>
           <input
@@ -85,6 +100,7 @@ export default function AudioFormDetails() {
             name="departmentlocation"
             aria-label="Location"
             placeholder="Enter the location"
+            defaultValue={isAudioEdit && audio ? audio.departmentlocation : ""}
           />
         </fieldset>
       </StyledFieldsContainer>

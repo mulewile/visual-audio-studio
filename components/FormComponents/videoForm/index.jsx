@@ -16,8 +16,7 @@ const StyledFieldsContainer = styled.div`
 export default function VideoFormDetails() {
   const isVideoEdit = useStore((state) => state.isVideoFormEdit);
   const videoToEditId = useStore((state) => state.videoToEditId);
-  console.log("videoToEditId", videoToEditId);
-  console.log("isVideoEdit", isVideoEdit);
+
   const router = useRouter();
 
   const { data: video, error } = useSWR(isVideoEdit && videoToEditId ? `/api/video/${videoToEditId}` : null);

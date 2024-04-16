@@ -4,6 +4,8 @@ const useStore = create((set) => ({
   customers: 34,
   isVideoFormEdit: false,
   videoToEditId: null,
+  audioToEditId: null,
+  customerToEditId: null,
   isAudioFormEdit: false,
   isCustomerFormEdit: false,
   isVideoFormCreate: false,
@@ -25,6 +27,12 @@ const useStore = create((set) => ({
     })),
   setVideoToEditId: (videoId) =>
     set((state) => ({ videoToEditId: (state.videoToEditId = videoId) })),
+  setAudioToEditId: (audioId) =>
+    set((state) => ({ audioToEditId: (state.audioToEditId = audioId) })),
+  setCustomerToEditId: (customerId) =>
+    set((state) => ({
+      customerToEditId: (state.customerToEditId = customerId),
+    })),
 }));
 
 export default useStore;
