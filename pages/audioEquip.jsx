@@ -1,16 +1,14 @@
-import StyledHeader from "@/components/Header";
+import Header from "@/components/Header";
 import useStore from "@/store/formStore";
 import AudioEquipmentStyledTable from "@/components/AudioEquipment";
 import StyledButton from "../components/Button";
-import { v4 as uuidv4 } from "uuid";
-import useSWR from "swr";
-import { useRouter } from "next/router";
+
 import { StyledLink } from "./audio/[id]";
 import Link from "next/link";
-import Image from "next/image";
+
 import myAudioImage from "../resources/mixer.png";
 
-const linkText = "MENU VIEW";
+
 
 const audioViewHeader = "Audio Equipment";
 
@@ -33,8 +31,8 @@ const activateAudioFormCreate = useStore((state)=>(state.activateAudioFormCreate
 
   return (
     <div style={backgroundStyle}>
-      <StyledHeader>{audioViewHeader}</StyledHeader>
-      <StyledLink href={"/"}>{linkText}</StyledLink>
+      <Header>{audioViewHeader}</Header>
+      <StyledLink href={""}>{audioViewHeader}</StyledLink>
       <Link href={`/add`}>
         <StyledButton
           disabled={false}

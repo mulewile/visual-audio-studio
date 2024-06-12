@@ -1,5 +1,5 @@
 import useStore from "@/store/formStore";
-import StyledHeader from "@/components/Header";
+import Header from "@/components/Header";
 import CustomerDetailsStyledTable from "@/components/customerDetails";
 import StyledButton from "../components/Button";
 import Link from "next/link";
@@ -28,8 +28,8 @@ export default function CustomerDetails() {
   const activateCustomerFormCreate = useStore((state)=>(state.activateCustomerFormCreate))
   return (
     <div style={backgroundStyle}>
-      <StyledHeader>{customerViewHeader}</StyledHeader>
-      <StyledLink href={"/"}>{linkText}</StyledLink>
+      <Header>{customerViewHeader}</Header>
+      <StyledLink href={""}>{customerViewHeader}</StyledLink>
       <Link href={`/add`}>
         <StyledButton
           disabled={false}
