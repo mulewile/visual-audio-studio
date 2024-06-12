@@ -1,18 +1,14 @@
-import StyledHeader from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/Header";
+
 import VideoEquipmentStyledTable from "../components/VideoEquipment/index";
-import styled from "styled-components";
-import { v4 as uuidv4 } from "uuid";
-import useSWR from "swr";
+
 import StyledButton from "../components/Button";
-import { useRouter } from "next/router";
-import Image from "next/image";
 import Link from "next/link";
 import { StyledLink } from "./video/[id]";
 import myVideoImage from "../resources/video_camera_one.png";
 import useStore from "@/store/formStore";
 
-const linkText = "MENU VIEW";
+
 
 export const backgroundStyle = {
   backgroundImage: `url(${myVideoImage.src})`,
@@ -39,9 +35,9 @@ const activateVideoFormCreate = useStore((state)=>(state.activateVideoFormCreate
 
   return (
     <div style={backgroundStyle}>
-      <StyledHeader>{videoViewHeader}</StyledHeader>
+      <Header>{videoViewHeader}</Header>
 
-      <StyledLink href={"/"}>{linkText}</StyledLink>
+      <StyledLink href={""}>{videoViewHeader}</StyledLink>
 
       <Link href={"/add"}>
         <StyledButton

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { SWRConfig } from "swr";
 import Footer from "@/components/Footer";
+import { StyledLink } from "./audio/[id]";
+
 import GlobalStyle from "../styles";
 
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -11,6 +13,7 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <GlobalStyle />
+
       <SWRConfig value={{ fetcher }}>
         <Component {...pageProps} />
       </SWRConfig>

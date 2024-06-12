@@ -1,27 +1,53 @@
 import styled from 'styled-components';
+import { StyledLink } from '@/pages/audio/[id]'; 
 
-const StyledHeader = styled.header`
-  //background: linear-gradient(90deg, #0A1828, #178582, #BFA181);
+const videoLinkText = "Video Equipment";
+const audioLinkText = "Audio Equipment";
+const customerLinkText = "Customer Details";
 
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-  font-size: 36px;
-  font-weight: bold;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  //border-bottom: 2px solid #0A1828;
-  box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
-  transition: background-color 0.4s ease, transform 0.2s ease, text-shadow 0.2s ease;
+const StyledBackground = styled.div`
 
-  &:hover {
-    //background: linear-gradient(90deg, #178582, #BFA181, #0A1828);
-    color: #fff;
-    transform: scale(1.05);
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-   
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
 `;
 
-export default StyledHeader;
+const StyledNav = styled.nav`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%; 
+  padding: 1rem;
+  margin: 0 auto; 
+  background-color: rgba(0, 0, 0, 0.8); 
+  border-radius: 8px; 
+`;
+
+
+
+const StyledHeader = styled.header`
+  color: #fff;
+  font-size: 2rem; 
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1rem; 
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+`;
+
+const Header = () => {
+  return (
+    <StyledBackground>
+      <StyledHeader>Visual Audio Studio</StyledHeader>
+      <StyledNav>
+        <StyledLink href={"/videoEquip"}>{videoLinkText}</StyledLink>
+        <StyledLink href={"/audioEquip"}>{audioLinkText}</StyledLink>
+        <StyledLink href={"/customerList"}>{customerLinkText}</StyledLink>
+      </StyledNav>
+    </StyledBackground>
+  );
+};
+
+export default Header;
 
