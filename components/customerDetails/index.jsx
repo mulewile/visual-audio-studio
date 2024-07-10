@@ -126,8 +126,8 @@ export default function CustomerDetailsStyledTable() {
           <StyledTableHeaderCell>Address</StyledTableHeaderCell>
           <StyledTableHeaderCell>Our Favourites</StyledTableHeaderCell>
           <StyledTableHeaderCell>Details</StyledTableHeaderCell>
-          <StyledTableHeaderCell>Manage</StyledTableHeaderCell>
-          <StyledTableHeaderCell></StyledTableHeaderCell>
+          <StyledTableHeaderCell>Update</StyledTableHeaderCell>
+          <StyledTableHeaderCell>Delete</StyledTableHeaderCell>
         </StyledTableRow>
       </StyledTableHeader>
       <tbody>

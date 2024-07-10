@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import useSWR from "swr"
-import { useRouter } from "next/router";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 import useStore from '@/store/formStore';
 import StyledButton from '../Button';
 import Link from 'next/link';
@@ -61,9 +63,31 @@ const ErrorMessage = styled.h1`
 
 export default function VideoEquipmentStyledTable() {
   
+
+  const success = () => toast.success("Rating successfully updated");
+  const errorToast = () => toast.error("Failed to update rating");
+  const catchError = () => toast.error("Error updating rating. Contact admin.");
 const activateVideoFormEdit = useStore((state)=>(state.activateVideoFormEdit))
 const setVideoToEditId = useStore((state)=>(state.setVideoToEditId))
   const { data, error } = useSWR("/api/video" );
+
+  async function deleteVideo(id) {
+    const response = await fetch(`/api/video/${id}`, {
+      method: "DELETE",
+    });
+    if (response.ok) {
+      toast.success("Video equipment deleted");
+    }else{
+      toast.error("Failed to delete video equipment");
+    }
+  }
+
+  function handleDelete(id) {
+    if (confirm("Are you sure you want to delete this item?")) {
+      deleteVideo(id);
+    }
+  }
+    
  
 
   if (error) {
@@ -82,6 +106,17 @@ const setVideoToEditId = useStore((state)=>(state.setVideoToEditId))
   return (
   <TableContainer>
     <StyledTable>
+    <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <StyledTableHeader>
       <StyledTableRow>
           <StyledTableHeaderCell>Name</StyledTableHeaderCell>
@@ -94,7 +129,8 @@ const setVideoToEditId = useStore((state)=>(state.setVideoToEditId))
           <StyledTableHeaderCell>Availability</StyledTableHeaderCell>
           <StyledTableHeaderCell>Location</StyledTableHeaderCell>
           <StyledTableHeaderCell>Details</StyledTableHeaderCell>
-          <StyledTableHeaderCell>Manage</StyledTableHeaderCell>
+          <StyledTableHeaderCell>Update</StyledTableHeaderCell>
+          <StyledTableHeaderCell>Delete</StyledTableHeaderCell>
         </StyledTableRow>
       </StyledTableHeader>
       <tbody>
@@ -113,6 +149,7 @@ const setVideoToEditId = useStore((state)=>(state.setVideoToEditId))
             <StyledTableCell><Link href={`/edit/${item._id}`}><StyledButton disabled={false} onClick={() => {
             activateVideoFormEdit(), setVideoToEditId(item._id);
           }} >EDIT</StyledButton></Link></StyledTableCell>
+          <StyledTableCell><StyledButton onClick={()=>handleDelete(item._id)} disabled={false} >DELETE</StyledButton></StyledTableCell>
           </StyledTableRow>
         ))}
       </tbody>

@@ -86,7 +86,8 @@ export default function AudioEquipmentStyledTable() {
           <StyledTableHeaderCell>Availability</StyledTableHeaderCell>
           <StyledTableHeaderCell>Location</StyledTableHeaderCell>
           <StyledTableHeaderCell>Details</StyledTableHeaderCell>
-          <StyledTableHeaderCell>Manage</StyledTableHeaderCell>
+          <StyledTableHeaderCell>Update</StyledTableHeaderCell>
+          <StyledTableHeaderCell>Delete</StyledTableHeaderCell>
         </StyledTableRow>
       </StyledTableHeader>
       <tbody>
@@ -105,6 +106,11 @@ export default function AudioEquipmentStyledTable() {
             <StyledTableCell>
             <Link href={`/edit/${item._id}`}>
                 <StyledButton disabled={false} onClick={()=>{activateAudioFormEdit(), setAudioToEditId(item._id) }} >EDIT</StyledButton>
+              </Link>
+            </StyledTableCell>
+            <StyledTableCell>
+              <Link href={`/delete/${item._id}`}>
+                <StyledButton disabled={false} onClick={()=>{setAudioToEditId(item._id)}} >DELETE</StyledButton>
               </Link>
             </StyledTableCell>
           </StyledTableRow>

@@ -20,7 +20,7 @@ export default function VideoFormDetails() {
   const router = useRouter();
 
   const { data: video, error } = useSWR(isVideoEdit && videoToEditId ? `/api/video/${videoToEditId}` : null);
-  console.log("video", video);
+
 
   if (isVideoEdit && error) {
     return (

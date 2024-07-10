@@ -1,7 +1,5 @@
 import Header from "@/components/Header";
-
 import VideoEquipmentStyledTable from "../components/VideoEquipment/index";
-
 import StyledButton from "../components/Button";
 import Link from "next/link";
 import { StyledLink } from "./video/[id]";

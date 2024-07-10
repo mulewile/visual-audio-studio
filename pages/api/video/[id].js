@@ -19,6 +19,16 @@ export default async function handler(request, response) {
         status: "success",
         message: `"Video with id ${id} found."`,
       });
+    } else if (request.method === "DELETE") {
+      const videoToDelete = await Video.findByIdAndDelete(id);
+      if (!videoToDelete) {
+        return response
+          .status(404)
+          .json({ status: "error", message: "Video equipment not found" });
+      }
+      return response
+        .status(200)
+        .json({ status: "success", message: "Video equipment deleted" });
     } else {
       return response
         .status(405)
