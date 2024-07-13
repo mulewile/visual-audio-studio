@@ -1,6 +1,7 @@
 
 import myVideoImage from "../resources/videocamera.png";
 import Header from "@/components/Header";
+import MainNavBar from "@/components/MainPageNav";
 
 export const backgroundStyle = {
   backgroundImage: `url(${myVideoImage.src})`,
@@ -19,7 +20,7 @@ export default function HomePage() {
   return (
     <div style={backgroundStyle}>
      <Header />
-
+      <MainNavBar />
     </div>
   );
 }

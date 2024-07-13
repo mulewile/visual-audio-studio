@@ -76,7 +76,7 @@ const setVideoToEditId = useStore((state)=>(state.setVideoToEditId))
       method: "DELETE",
     });
     if (response.ok) {
-      toast.success("Video equipment deleted");
+      success();
     }else{
       toast.error("Failed to delete video equipment");
     }

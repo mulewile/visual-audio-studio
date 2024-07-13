@@ -40,11 +40,7 @@ const Header = () => {
   return (
     <StyledBackground>
       <StyledHeader>Visual Audio Studio</StyledHeader>
-      <StyledNav>
-        <StyledLink href={"/videoEquip"}>{videoLinkText}</StyledLink>
-        <StyledLink href={"/audioEquip"}>{audioLinkText}</StyledLink>
-        <StyledLink href={"/customerList"}>{customerLinkText}</StyledLink>
-      </StyledNav>
+
     </StyledBackground>
   );
 };
